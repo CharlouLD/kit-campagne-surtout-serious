@@ -1,0 +1,39 @@
+/* ============================================================
+   Campagne Charles-Éric — « Surtout Serious »
+   Kit matériel · Award Fun & Serious 2026 · Bump
+   Shared tokens + fonts. Per-format layout lives in each file.
+   ============================================================ */
+
+@font-face{font-family:"DM Sans";src:url("../assets/fonts/DMSans-Black.ttf") format("truetype");font-weight:900;font-style:normal;font-display:block;}
+@font-face{font-family:"DM Sans";src:url("../assets/fonts/DMSans-ExtraBold.ttf") format("truetype");font-weight:800;font-style:normal;font-display:block;}
+@font-face{font-family:"DM Sans";src:url("../assets/fonts/DMSans-Bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:block;}
+@font-face{font-family:"DM Sans";src:url("../assets/fonts/DMSans-Medium.ttf") format("truetype");font-weight:500;font-style:normal;font-display:block;}
+@font-face{font-family:"Inter";src:url("../assets/fonts/Inter-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:block;}
+@font-face{font-family:"Inter";src:url("../assets/fonts/Inter-Medium.ttf") format("truetype");font-weight:500;font-style:normal;font-display:block;}
+@font-face{font-family:"Inter";src:url("../assets/fonts/Inter-SemiBold.ttf") format("truetype");font-weight:600;font-style:normal;font-display:block;}
+@font-face{font-family:"Inter";src:url("../assets/fonts/Inter-Bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:block;}
+
+:root{
+  --coral:#FF5252;
+  --coral-deep:#F03A3A;
+  --navy:#153879;
+  --navy-ink:#1E2A3A;
+  --navy-deep:#0E244E;
+  --grey-light:#F2F2F2;
+  --white:#FFFFFF;
+  --display:"DM Sans",system-ui,sans-serif;
+  --body:"Inter",system-ui,sans-serif;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{font-family:var(--body);-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;}
+
+/* artboard = the exact-pixel deliverable. Each format file sets w/h. */
+.artboard{position:relative;overflow:hidden;}
+
+/* recurring eyebrow / kicker */
+.kicker{font-family:var(--body);font-weight:600;text-transform:uppercase;color:var(--coral);}
+
+/* slogan display */
+.slogan{font-family:var(--display);font-weight:900;letter-spacing:-0.03em;line-height:0.95;}

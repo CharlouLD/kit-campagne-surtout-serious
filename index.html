@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kit de campagne — Charles-Éric · Surtout Serious</title>
+<link rel="stylesheet" href="styles/campaign.css">
+<style>
+  body{background:#0f1f3a;color:#fff;
+    background:radial-gradient(120% 70% at 85% -5%, rgba(255,82,82,0.14) 0%, rgba(255,82,82,0) 50%),linear-gradient(170deg,#16335f 0%,#10203c 60%,#0e1b33 100%);
+    min-height:100vh;}
+  .wrap{max-width:1280px;margin:0 auto;padding:72px 48px 96px;}
+
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:14px;}
+  header.top img.logo{height:44px;display:block;}
+  header.top .meta{font-family:var(--body);font-weight:600;font-size:14px;letter-spacing:0.18em;text-transform:uppercase;color:#9fb2da;}
+
+  .hero{margin:40px 0 64px;border-top:1px solid rgba(255,255,255,0.12);padding-top:40px;}
+  .hero .kick{display:flex;align-items:center;gap:12px;margin-bottom:22px;}
+  .hero .kick img{height:26px;display:block;}
+  .hero .kick span{font-family:var(--body);font-weight:700;font-size:15px;letter-spacing:0.16em;text-transform:uppercase;color:var(--coral);}
+  .hero h1{margin:0;font-family:var(--display);font-weight:900;letter-spacing:-0.035em;line-height:0.92;font-size:84px;}
+  .hero h1 .s{color:var(--coral);}
+  .hero p{margin:24px 0 0;font-family:var(--body);font-size:20px;line-height:1.5;color:#c3cfe8;max-width:680px;}
+
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:28px;}
+  .card{grid-column:span 4;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);
+    border-radius:20px;overflow:hidden;display:flex;flex-direction:column;
+    transition:border-color .2s cubic-bezier(.4,0,.2,1),transform .2s cubic-bezier(.4,0,.2,1);text-decoration:none;color:inherit;}
+  .card:hover{border-color:rgba(255,82,82,0.5);transform:translateY(-3px);}
+  .card .frame{background:#0c1830;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .card .frame.checker{background:repeating-conic-gradient(#1a2942 0% 25%, #14223b 0% 50%) 50% / 28px 28px;}
+  .thumb{overflow:hidden;position:relative;flex:none;}
+  .thumb iframe{border:0;transform-origin:top left;display:block;pointer-events:none;}
+  .card .cap{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px;}
+  .card .cap .nm{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-0.01em;}
+  .card .cap .dim{font-family:var(--mono,monospace);font-weight:500;font-size:13px;letter-spacing:0.04em;color:#8aa0cc;}
+  .card .cap .desc{font-family:var(--body);font-size:14px;line-height:1.45;color:#a9b8d8;margin-top:2px;}
+
+  .span6{grid-column:span 6;}
+  .span12{grid-column:span 12;}
+
+  footer{margin-top:64px;border-top:1px solid rgba(255,255,255,0.12);padding-top:28px;
+    font-family:var(--body);font-size:14px;color:#8aa0cc;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+
+  @media(max-width:900px){
+    .card,.span6{grid-column:span 6;}
+    .hero h1{font-size:60px;}
+  }
+  @media(max-width:600px){
+    .card,.span6,.span12{grid-column:span 12;}
+    .wrap{padding:48px 24px 72px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <img class="logo" src="assets/logo-bump-white.png" alt="bump">
+    <div class="meta">Award interne Fun&nbsp;&amp;&nbsp;Serious · Édition 2026</div>
+  </header>
+
+  <section class="hero">
+    <div class="kick"><img src="assets/bolt-coral.png" alt=""><span>Matériel de campagne · Candidat sortant</span></div>
+    <h1 class="slogan">Surtout <span class="s">Serious.</span></h1>
+    <p>Le kit complet de Charles-Éric pour le mandat numéro quatre. Six formats, une seule série&nbsp;: même palette coral &amp; navy, même typo, même éclair. Cliquez sur un visuel pour l'ouvrir en taille réelle et l'exporter.</p>
+  </section>
+
+  <div class="grid">
+    <!-- Affiche A3 -->
+    <a class="card span6" href="formats/affiche-a3.html" target="_blank">
+      <div class="frame">
+        <div class="thumb" style="width:412px;height:582px;">
+          <iframe src="formats/affiche-a3.html" style="width:3508px;height:4961px;transform:scale(0.11744);" scrolling="no"></iframe>
+        </div>
+      </div>
+      <div class="cap">
+        <div class="nm">Affiche principale</div>
+        <div class="dim">A3 portrait · 3508 × 4961 px</div>
+        <div class="desc">Portrait héroïque, slogan signature et mention « candidat sortant ».</div>
+      </div>
+    </a>
+
+    <!-- Right column stack: visio + linkedin -->
+    <div class="span6" style="display:flex;flex-direction:column;gap:28px;">
+      <a class="card" style="grid-column:auto;" href="formats/visio-1920x1080.html" target="_blank">
+        <div class="frame">
+          <div class="thumb" style="width:636px;height:357.75px;">
+            <iframe src="formats/visio-1920x1080.html" style="width:1920px;height:1080px;transform:scale(0.33125);" scrolling="no"></iframe>
+          </div>
+        </div>
+        <div class="cap">
+          <div class="nm">Fond visio</div>
+          <div class="dim">Google Meet / Zoom · 1920 × 1080 px</div>
+          <div class="desc">Texte à gauche, portrait à droite — lisible derrière une fenêtre de visio.</div>
+        </div>
+      </a>
+
+      <a class="card" style="grid-column:auto;" href="formats/linkedin-banner.html" target="_blank">
+        <div class="frame">
+          <div class="thumb" style="width:636px;height:159px;">
+            <iframe src="formats/linkedin-banner.html" style="width:1584px;height:396px;transform:scale(0.40152);" scrolling="no"></iframe>
+          </div>
+        </div>
+        <div class="cap">
+          <div class="nm">Bannière LinkedIn</div>
+          <div class="dim">Couverture · 1584 × 396 px</div>
+          <div class="desc">Coin bas-gauche dégagé pour la photo de profil ronde.</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Wallpaper iPhone -->
+    <a class="card span4" href="formats/wallpaper-iphone.html" target="_blank">
+      <div class="frame">
+        <div class="thumb" style="width:268px;height:580.96px;">
+          <iframe src="formats/wallpaper-iphone.html" style="width:1290px;height:2796px;transform:scale(0.20775);" scrolling="no"></iframe>
+        </div>
+      </div>
+      <div class="cap">
+        <div class="nm">Fond d'écran iPhone</div>
+        <div class="dim">Vertical · 1290 × 2796 px</div>
+        <div class="desc">Composition épurée, zones haut/bas dégagées pour l'heure et les icônes.</div>
+      </div>
+    </a>
+
+    <!-- Badge -->
+    <a class="card span4" href="formats/badge-1024.html" target="_blank">
+      <div class="frame checker">
+        <div class="thumb" style="width:340px;height:340px;">
+          <iframe src="formats/badge-1024.html" style="width:1024px;height:1024px;transform:scale(0.33203);background:transparent;" scrolling="no"></iframe>
+        </div>
+      </div>
+      <div class="cap">
+        <div class="nm">Badge « Je vote »</div>
+        <div class="dim">Rond · 1024 × 1024 px · fond transparent</div>
+        <div class="desc">Pin de campagne à coller partout. Fond transparent (damier = transparence).</div>
+      </div>
+    </a>
+
+    <!-- Slack -->
+    <a class="card span4" href="formats/slack-512.html" target="_blank">
+      <div class="frame">
+        <div class="thumb" style="width:340px;height:340px;">
+          <iframe src="formats/slack-512.html" style="width:512px;height:512px;transform:scale(0.6640625);" scrolling="no"></iframe>
+        </div>
+      </div>
+      <div class="cap">
+        <div class="nm">Photo de profil Slack</div>
+        <div class="dim">Carré · 512 × 512 px</div>
+        <div class="desc">Portrait recadré serré, liseré coral, éclair — lisible en miniature.</div>
+      </div>
+    </a>
+  </div>
+
+  <footer>
+    <span>Charles-Éric · Le mandat numéro quatre · Award Fun&nbsp;&amp;&nbsp;Serious 2026</span>
+    <span>Palette : Coral #FF5252 · Navy #153879 / #1E2A3A · Gris #F2F2F2</span>
+  </footer>
+</div>
+</body>
+</html>

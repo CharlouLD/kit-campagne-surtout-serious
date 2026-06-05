@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Wallpaper iPhone — Surtout Serious</title>
+<link rel="stylesheet" href="../styles/campaign.css">
+<style>
+  html,body{background:#11203a;}
+  .wall{
+    width:1290px;height:2796px;color:var(--white);overflow:hidden;
+    background:
+      radial-gradient(80% 50% at 50% 30%, rgba(255,82,82,0.18) 0%, rgba(255,82,82,0) 55%),
+      linear-gradient(170deg, #173B7E 0%, #15326A 50%, #15243C 100%);
+  }
+  /* faint giant bolt watermark, centered low */
+  .wall .wm{position:absolute;left:50%;top:1640px;transform:translateX(-50%) rotate(-6deg);width:900px;opacity:0.05;}
+  .wall .wm img{width:100%;display:block;}
+
+  /* safe top zone (clock) ends ~ 470; safe bottom (icons) starts ~ 2360 */
+  .wall .center{position:absolute;left:0;right:0;top:760px;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 110px;}
+  .wall .bolt{width:200px;margin-bottom:80px;}
+  .wall .bolt img{width:100%;display:block;filter:drop-shadow(0 20px 36px rgba(255,82,82,0.35));}
+  .wall h1{margin:0;font-family:var(--display);font-weight:900;letter-spacing:-0.04em;line-height:0.92;font-size:228px;}
+  .wall h1 .w{display:block;color:#fff;}
+  .wall h1 .s{display:block;color:var(--coral);}
+  .wall .kick{margin-top:70px;font-family:var(--body);font-weight:600;font-size:38px;letter-spacing:0.22em;text-transform:uppercase;color:#9fb2da;}
+
+  .wall .bottom{position:absolute;left:0;right:0;bottom:300px;display:flex;flex-direction:column;align-items:center;gap:34px;}
+  .wall .bottom .name{font-family:var(--display);font-weight:700;font-size:54px;letter-spacing:-0.01em;color:#fff;}
+  .wall .bottom .logo{height:50px;opacity:0.85;}
+</style>
+</head>
+<body>
+<div class="artboard wall" data-screen-label="Wallpaper iPhone">
+  <div class="wm"><img src="../assets/bolt-white.png" alt=""></div>
+
+  <div class="center">
+    <div class="bolt"><img src="../assets/bolt-coral.png" alt=""></div>
+    <h1 class="slogan"><span class="w">Surtout</span><span class="s">Serious.</span></h1>
+    <div class="kick">Le mandat numéro quatre</div>
+  </div>
+
+  <div class="bottom">
+    <div class="name">Charles-Éric · N°4</div>
+    <img class="logo" src="../assets/logo-bump-white.png" alt="bump">
+  </div>
+</div>
+</body>
+</html>

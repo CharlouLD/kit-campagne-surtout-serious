@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Avatar Slack — Charles-Éric</title>
+<link rel="stylesheet" href="../styles/campaign.css">
+<style>
+  html,body{background:#11203a;}
+  .avatar{width:512px;height:512px;overflow:hidden;
+    background:linear-gradient(160deg,#1d4a8f 0%,#16284a 100%);}
+  .avatar .pic{position:absolute;inset:0;}
+  .avatar .pic img{width:100%;height:100%;object-fit:cover;object-position:48% 36%;display:block;}
+  /* coral liseré ring */
+  .avatar .ring{position:absolute;inset:0;border:18px solid var(--coral);pointer-events:none;}
+  /* small bolt badge, bottom-right */
+  .avatar .badge{position:absolute;right:30px;bottom:30px;width:118px;height:118px;border-radius:999px;
+    background:var(--coral);display:flex;align-items:center;justify-content:center;
+    box-shadow:0 10px 24px rgba(8,18,40,0.45);border:7px solid #16284a;}
+  .avatar .badge img{width:48px;display:block;}
+</style>
+</head>
+<body>
+<div class="artboard avatar" data-screen-label="Avatar Slack">
+  <div class="pic"><img src="../assets/avatar-crop.png" alt="Charles-Éric"></div>
+  <div class="ring"></div>
+  <div class="badge"><img src="../assets/bolt-white.png" alt=""></div>
+</div>
+</body>
+</html>

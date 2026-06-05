@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Affiche A3 — Charles-Éric · Surtout Serious</title>
+<link rel="stylesheet" href="../styles/campaign.css">
+<style>
+  html,body{background:#11203a;}
+  .a3{
+    width:3508px;height:4961px;background:
+      radial-gradient(120% 80% at 82% 8%, rgba(255,82,82,0.20) 0%, rgba(255,82,82,0) 46%),
+      radial-gradient(120% 90% at 8% 96%, rgba(14,36,78,0.65) 0%, rgba(14,36,78,0) 50%),
+      linear-gradient(168deg, #173B7E 0%, #15326A 44%, #16263F 100%);
+    color:var(--white);
+  }
+  .coral-rule{position:absolute;top:0;left:0;right:0;height:30px;background:var(--coral);}
+  .wm{position:absolute;top:1520px;right:-260px;width:1700px;opacity:0.06;transform:rotate(-8deg);pointer-events:none;}
+  .wm img{width:100%;display:block;}
+
+  /* header */
+  .a3-head{position:absolute;top:236px;left:240px;right:240px;display:flex;justify-content:space-between;align-items:center;}
+  .a3-head img{height:150px;display:block;}
+  .a3-head .meta{font-family:var(--body);font-weight:600;font-size:46px;letter-spacing:0.26em;text-transform:uppercase;color:#cdd9f4;}
+
+  /* slogan */
+  .a3-slogan{position:absolute;top:560px;left:240px;right:240px;}
+  .a3-eyebrow{display:flex;align-items:center;gap:34px;margin-bottom:62px;}
+  .a3-eyebrow img{height:78px;display:block;}
+  .a3-eyebrow span{font-family:var(--body);font-weight:700;font-size:50px;letter-spacing:0.2em;text-transform:uppercase;color:var(--coral);}
+  .a3-slogan h1{margin:0;font-family:var(--display);font-weight:900;letter-spacing:-0.035em;line-height:0.9;font-size:430px;}
+  .a3-slogan h1 .l1{display:block;color:#ffffff;}
+  .a3-slogan h1 .l2{display:block;color:var(--coral);}
+  .a3-slogan .tail{margin-top:54px;font-family:var(--display);font-weight:500;font-size:120px;letter-spacing:-0.01em;color:#dbe4f7;line-height:1;}
+
+  /* portrait */
+  .a3-portrait{position:absolute;left:50%;transform:translateX(-50%);bottom:500px;width:3900px;
+    filter:drop-shadow(0 60px 90px rgba(8,18,40,0.55));}
+  .a3-portrait img{width:100%;display:block;}
+
+  /* footer bandeau */
+  .a3-foot{position:absolute;left:0;right:0;bottom:0;height:560px;background:var(--coral);
+    display:flex;align-items:center;justify-content:space-between;padding:0 240px;
+    box-shadow:0 -30px 70px rgba(8,18,40,0.35);}
+  .a3-foot::before{content:"";position:absolute;top:0;left:0;right:0;height:8px;background:rgba(255,255,255,0.35);}
+  .a3-name{font-family:var(--display);font-weight:900;letter-spacing:-0.03em;line-height:0.86;color:var(--white);}
+  .a3-name .nm{display:block;font-size:236px;}
+  .a3-name .sub{display:block;font-family:var(--body);font-weight:700;font-size:62px;letter-spacing:0.02em;color:#3a0f0f;margin-top:18px;}
+  .a3-foot .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:26px;}
+  .a3-foot .right .badge4{font-family:var(--display);font-weight:900;font-size:120px;color:var(--white);line-height:1;
+    border:7px solid rgba(255,255,255,0.85);border-radius:999px;padding:18px 64px;}
+  .a3-foot .right .mention{font-family:var(--body);font-weight:600;font-size:50px;letter-spacing:0.04em;color:#fff;max-width:1000px;text-align:right;line-height:1.25;}
+</style>
+</head>
+<body>
+<div class="artboard a3" data-screen-label="Affiche A3">
+  <div class="coral-rule"></div>
+  <div class="wm"><img src="../assets/bolt-white.png" alt=""></div>
+
+  <header class="a3-head">
+    <img src="../assets/logo-bump-white.png" alt="bump">
+    <div class="meta">Award&nbsp;interne · Fun&nbsp;&amp;&nbsp;Serious 2026</div>
+  </header>
+
+  <div class="a3-slogan">
+    <div class="a3-eyebrow">
+      <img src="../assets/bolt-coral.png" alt="">
+      <span>Candidat sortant — 3 mandats consécutifs</span>
+    </div>
+    <h1 class="slogan">
+      <span class="l1">Fun &amp; Serious.</span>
+      <span class="l2">Surtout Serious.</span>
+    </h1>
+    <div class="tail">Mais avec le sourire.</div>
+  </div>
+
+  <div class="a3-portrait">
+    <img src="../assets/portrait-cutout.png" alt="Charles-Éric">
+  </div>
+
+  <footer class="a3-foot">
+    <div class="a3-name">
+      <span class="nm">Charles-Éric</span>
+      <span class="sub">Le mandat numéro quatre</span>
+    </div>
+    <div class="right">
+      <div class="badge4">N°4</div>
+      <div class="mention">Award Fun&nbsp;&amp;&nbsp;Serious 2026 · Bump</div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
