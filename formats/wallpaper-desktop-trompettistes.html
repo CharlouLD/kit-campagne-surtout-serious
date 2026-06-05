@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fond d'écran — Trompettistes</title>
+<style>
+  @font-face {
+    font-family: 'DM Sans';
+    src: url('../fonts/DMSans-VariableFont_opsz_wght.ttf') format('truetype-variations');
+    font-weight: 100 1000; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter-VariableFont_opsz_wght.ttf') format('truetype-variations');
+    font-weight: 100 900; font-style: normal; font-display: swap;
+  }
+
+  :root {
+    --coral: #FF5252;
+    --coral-600: #F03A3A;
+    --navy: #153879;
+    --navy-900: #0E244E;
+    --navy-800: #1D2939;
+    --navy-700: #2C405A;
+    --yellow: #FFC043;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: #0a1733;
+    overflow: hidden;
+  }
+
+  /* Letterbox stage */
+  #stage {
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: #06101f;
+  }
+
+  /* Fixed 1920x1080 canvas */
+  #wallpaper {
+    position: relative;
+    flex: none;
+    width: 1920px; height: 1080px;
+    overflow: hidden;
+    background:
+      radial-gradient(1200px 760px at 84% -8%, rgba(255,82,82,.20) 0%, rgba(255,82,82,0) 58%),
+      radial-gradient(1000px 700px at -6% 108%, rgba(255,192,67,.14) 0%, rgba(255,192,67,0) 56%),
+      radial-gradient(900px 680px at 12% 6%, rgba(21,56,121,.55) 0%, rgba(21,56,121,0) 60%),
+      linear-gradient(158deg, #11203c 0%, #0c1a31 48%, #0a1530 100%);
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--white);
+  }
+
+  /* soft blurred brand blobs */
+  .blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(120px); opacity: .45; pointer-events: none;
+  }
+  .blob.coral  { width: 720px; height: 720px; right: -160px; top: -240px; background: var(--coral); opacity: .30; }
+  .blob.yellow { width: 560px; height: 560px; left: -180px; bottom: -220px; background: var(--yellow); opacity: .16; }
+  .blob.navy   { width: 760px; height: 760px; left: 18%; top: 30%; background: var(--navy); opacity: .42; }
+
+  /* subtle dot grid texture */
+  #wallpaper::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,.045) 1.4px, transparent 1.4px);
+    background-size: 38px 38px;
+    mask-image: radial-gradient(120% 100% at 50% 40%, #000 35%, transparent 88%);
+    pointer-events: none;
+  }
+
+  /* ---- Equalizer / brass soundwave motif across the bottom ---- */
+  .equalizer {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 360px;
+    display: flex; align-items: flex-end; justify-content: center;
+    gap: 12px; padding: 0 120px 0;
+    opacity: .9; pointer-events: none;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  }
+  .equalizer .bar {
+    width: 14px; border-radius: 8px 8px 0 0;
+    background: linear-gradient(180deg, rgba(255,82,82,.0) 0%, rgba(255,82,82,.28) 100%);
+  }
+
+  /* The "muted" diagonal — we won't be fooled */
+  .mute-slash {
+    position: absolute; bottom: 96px; left: 50%;
+    width: 1480px; height: 4px; transform: translateX(-50%) rotate(-7deg);
+    background: linear-gradient(90deg, transparent, rgba(255,82,82,.0) 6%, var(--coral) 30%, var(--coral) 70%, rgba(255,82,82,.0) 94%, transparent);
+    opacity: .0; /* hidden; kept for reference */
+  }
+
+  /* ---- Content ---- */
+  .content {
+    position: relative; z-index: 3;
+    height: 100%;
+    display: flex; flex-direction: column;
+    padding: 132px 150px 130px;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 16px;
+    font-weight: 600; font-size: 19px; letter-spacing: .26em; text-transform: uppercase;
+    color: rgba(255,255,255,.62);
+  }
+  .eyebrow .tag {
+    color: var(--coral); letter-spacing: .26em;
+  }
+  .eyebrow .rule { width: 64px; height: 2px; background: rgba(255,255,255,.22); }
+
+  .headline {
+    margin-top: auto;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 150px;
+    line-height: .98;
+    letter-spacing: -0.035em;
+    max-width: 1480px;
+    text-wrap: balance;
+  }
+  .headline .soft { color: rgba(255,255,255,.94); }
+  .headline .coral {
+    position: relative;
+    color: var(--coral);
+    white-space: nowrap;
+  }
+  /* slash through "trompettistes" — they won't fool us */
+  .headline .coral .strike {
+    position: absolute; left: -6px; right: -6px; top: 54%; height: 9px;
+    background: var(--coral); border-radius: 6px;
+    transform: rotate(-2.4deg);
+    box-shadow: 0 0 0 4px rgba(10,21,48,.0);
+  }
+
+  .subline {
+    margin-top: 46px;
+    display: flex; align-items: center; gap: 22px;
+    font-size: 26px; font-weight: 500; letter-spacing: .005em;
+    color: rgba(255,255,255,.66);
+  }
+  .subline .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--yellow); flex: none; }
+
+  /* logo bottom-right */
+  .logo {
+    position: absolute; right: 150px; bottom: 120px; z-index: 4;
+    height: 54px; width: auto; opacity: .96;
+  }
+
+  /* small corner trio of brand dots top-right */
+  .brand-dots {
+    position: absolute; top: 146px; right: 150px; z-index: 4;
+    display: flex; gap: 14px;
+  }
+  .brand-dots span { width: 18px; height: 18px; border-radius: 50%; }
+  .brand-dots .c { background: var(--coral); }
+  .brand-dots .n { background: #6f86c9; }
+  .brand-dots .y { background: var(--yellow); }
+</style>
+</head>
+<body>
+  <div id="stage">
+    <div id="wallpaper">
+      <div class="blob coral"></div>
+      <div class="blob yellow"></div>
+      <div class="blob navy"></div>
+
+      <div class="equalizer" id="eq"></div>
+      <div class="mute-slash"></div>
+
+      <div class="brand-dots"><span class="c"></span><span class="n"></span><span class="y"></span></div>
+      <img class="logo" src="../assets/logo-bump-white.png" alt="Bump">
+
+      <div class="content">
+        <div>
+          <span class="eyebrow"><span class="rule"></span><span class="tag">Bump Awards</span> &nbsp;·&nbsp; Édition 2026</span>
+        </div>
+
+        <h1 class="headline">
+          <span class="soft">On va pas se</span><br>
+          <span class="soft">faire avoir par les</span><br>
+          <span class="coral">trompettistes<span class="strike"></span></span><span class="soft">.</span>
+        </h1>
+
+        <div class="subline">
+          <span class="dot"></span>
+          On garde le cap. On garde la charge.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Build the equalizer bars with a gentle brass-section silhouette
+    (function () {
+      const eq = document.getElementById('eq');
+      const N = 76;
+      const W = 1920 - 240;
+      for (let i = 0; i < N; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'bar';
+        const t = i / (N - 1);
+        // layered sine for an organic "soundwave" profile
+        const wave = Math.sin(t * Math.PI * 5.0) * 0.5 + Math.sin(t * Math.PI * 11.0) * 0.22 + Math.sin(t * Math.PI * 2.0) * 0.3;
+        const env = Math.sin(t * Math.PI); // fade ends
+        const h = 26 + Math.max(0, (wave + 0.9)) * env * 150;
+        bar.style.height = h.toFixed(0) + 'px';
+        eq.appendChild(bar);
+      }
+    })();
+
+    // Scale the fixed 1920x1080 canvas to fit any viewport (letterbox)
+    (function () {
+      const wp = document.getElementById('wallpaper');
+      function fit() {
+        const s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+        wp.style.transform = 'scale(' + s + ')';
+      }
+      window.addEventListener('resize', fit);
+      fit();
+    })();
+  </script>
+</body>
+</html>
