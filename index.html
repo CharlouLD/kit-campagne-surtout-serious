@@ -55,6 +55,16 @@
   .card .cap .nm{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-0.01em;}
   .card .cap .dim{font-family:var(--mono,monospace);font-weight:500;font-size:13px;letter-spacing:0.04em;color:#8aa0cc;}
   .card .cap .desc{font-family:var(--body);font-size:14px;line-height:1.45;color:#a9b8d8;margin-top:2px;}
+  .card .frame{text-decoration:none;color:inherit;}
+  .card .actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
+  .card .act{font-family:var(--body);font-weight:600;font-size:13px;letter-spacing:0.02em;
+    text-decoration:none;padding:9px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;
+    transition:background .2s cubic-bezier(.4,0,.2,1),border-color .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);}
+  .card .act svg{width:15px;height:15px;}
+  .card .act.dl{background:var(--coral);color:#fff;}
+  .card .act.dl:hover{background:var(--coral-deep);}
+  .card .act.ghost{color:#c3cfe8;border:1px solid rgba(255,255,255,0.18);}
+  .card .act.ghost:hover{border-color:rgba(255,82,82,0.5);color:#fff;}
 
   .span6{grid-column:span 6;}
   .span12{grid-column:span 12;}
@@ -82,7 +92,7 @@
   <section class="hero">
     <div class="kick"><img src="assets/bolt-coral.png" alt=""><span>Matériel de campagne · Candidat sortant</span></div>
     <h1 class="slogan">Surtout <span class="s">Serious.</span></h1>
-    <p>Le kit complet de Charles-Éric pour le mandat numéro quatre. Six formats, une seule série&nbsp;: même palette coral &amp; navy, même typo, même éclair. Cliquez sur un visuel pour l'ouvrir en taille réelle et l'exporter.</p>
+    <p>Le kit complet de Charles-Éric pour le mandat numéro quatre. Huit visuels, une seule série&nbsp;: même palette coral &amp; navy, même typo, même éclair. Téléchargez chaque visuel en PNG haute résolution, ou ouvrez-le en taille réelle.</p>
 
     <div class="player" id="player">
       <button class="play" id="playBtn" type="button" aria-label="Écouter l'allocution de campagne">
@@ -101,117 +111,173 @@
 
   <div class="grid">
     <!-- Affiche A3 -->
-    <a class="card span6" href="formats/affiche-a3.html" target="_blank">
-      <div class="frame">
+    <div class="card span6">
+      <a class="frame" href="formats/affiche-a3.html" target="_blank" aria-label="Ouvrir l'affiche A3 en taille réelle">
         <div class="thumb" style="width:412px;height:582px;">
           <iframe src="formats/affiche-a3.html" style="width:3508px;height:4961px;transform:scale(0.11744);" scrolling="no"></iframe>
         </div>
-      </div>
+      </a>
       <div class="cap">
         <div class="nm">Affiche principale</div>
         <div class="dim">A3 portrait · 3508 × 4961 px</div>
         <div class="desc">Portrait héroïque, slogan signature et mention « candidat sortant ».</div>
+        <div class="actions">
+          <a class="act dl" href="exports/affiche-a3.png" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
+            Télécharger le PNG
+          </a>
+          <a class="act ghost" href="formats/affiche-a3.html" target="_blank">Ouvrir en grand</a>
+        </div>
       </div>
-    </a>
+    </div>
 
     <!-- Right column stack: visio + linkedin -->
     <div class="span6" style="display:flex;flex-direction:column;gap:28px;">
-      <a class="card" style="grid-column:auto;" href="formats/visio-1920x1080.html" target="_blank">
-        <div class="frame">
+      <div class="card" style="grid-column:auto;">
+        <a class="frame" href="formats/visio-1920x1080.html" target="_blank" aria-label="Ouvrir le fond visio en taille réelle">
           <div class="thumb" style="width:636px;height:357.75px;">
             <iframe src="formats/visio-1920x1080.html" style="width:1920px;height:1080px;transform:scale(0.33125);" scrolling="no"></iframe>
           </div>
-        </div>
+        </a>
         <div class="cap">
           <div class="nm">Fond visio</div>
           <div class="dim">Google Meet / Zoom · 1920 × 1080 px</div>
           <div class="desc">Texte à gauche, portrait à droite — lisible derrière une fenêtre de visio.</div>
+          <div class="actions">
+            <a class="act dl" href="exports/visio-1920x1080.png" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
+              Télécharger le PNG
+            </a>
+            <a class="act ghost" href="formats/visio-1920x1080.html" target="_blank">Ouvrir en grand</a>
+          </div>
         </div>
-      </a>
+      </div>
 
-      <a class="card" style="grid-column:auto;" href="formats/linkedin-banner.html" target="_blank">
-        <div class="frame">
+      <div class="card" style="grid-column:auto;">
+        <a class="frame" href="formats/linkedin-banner.html" target="_blank" aria-label="Ouvrir la bannière LinkedIn en taille réelle">
           <div class="thumb" style="width:636px;height:159px;">
             <iframe src="formats/linkedin-banner.html" style="width:1584px;height:396px;transform:scale(0.40152);" scrolling="no"></iframe>
           </div>
-        </div>
+        </a>
         <div class="cap">
           <div class="nm">Bannière LinkedIn</div>
           <div class="dim">Couverture · 1584 × 396 px</div>
           <div class="desc">Coin bas-gauche dégagé pour la photo de profil ronde.</div>
+          <div class="actions">
+            <a class="act dl" href="exports/linkedin-banner.png" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
+              Télécharger le PNG
+            </a>
+            <a class="act ghost" href="formats/linkedin-banner.html" target="_blank">Ouvrir en grand</a>
+          </div>
         </div>
-      </a>
+      </div>
     </div>
 
     <!-- Wallpaper iPhone -->
-    <a class="card span4" href="formats/wallpaper-iphone.html" target="_blank">
-      <div class="frame">
+    <div class="card span4">
+      <a class="frame" href="formats/wallpaper-iphone.html" target="_blank" aria-label="Ouvrir le fond d'écran iPhone en taille réelle">
         <div class="thumb" style="width:268px;height:580.96px;">
           <iframe src="formats/wallpaper-iphone.html" style="width:1290px;height:2796px;transform:scale(0.20775);" scrolling="no"></iframe>
         </div>
-      </div>
+      </a>
       <div class="cap">
         <div class="nm">Fond d'écran iPhone</div>
         <div class="dim">Vertical · 1290 × 2796 px</div>
         <div class="desc">Composition épurée, zones haut/bas dégagées pour l'heure et les icônes.</div>
+        <div class="actions">
+          <a class="act dl" href="exports/wallpaper-iphone.png" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
+            Télécharger le PNG
+          </a>
+          <a class="act ghost" href="formats/wallpaper-iphone.html" target="_blank">Ouvrir en grand</a>
+        </div>
       </div>
-    </a>
+    </div>
 
     <!-- Wallpaper iPhone — Trompettistes -->
-    <a class="card span4" href="formats/wallpaper-iphone-trompettistes.html" target="_blank">
-      <div class="frame">
+    <div class="card span4">
+      <a class="frame" href="formats/wallpaper-iphone-trompettistes.html" target="_blank" aria-label="Ouvrir le fond d'écran Trompettistes en taille réelle">
         <div class="thumb" style="width:268px;height:580.96px;">
           <iframe src="formats/wallpaper-iphone-trompettistes.html" style="width:1290px;height:2796px;transform:scale(0.20775);" scrolling="no"></iframe>
         </div>
-      </div>
+      </a>
       <div class="cap">
         <div class="nm">Fond d'écran iPhone — Trompettistes</div>
         <div class="dim">Vertical · 1290 × 2796 px</div>
         <div class="desc">« On va pas se faire avoir par les trompettistes ! » La chute en coral.</div>
+        <div class="actions">
+          <a class="act dl" href="exports/wallpaper-iphone-trompettistes.png" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
+            Télécharger le PNG
+          </a>
+          <a class="act ghost" href="formats/wallpaper-iphone-trompettistes.html" target="_blank">Ouvrir en grand</a>
+        </div>
       </div>
-    </a>
+    </div>
 
     <!-- Badge -->
-    <a class="card span4" href="formats/badge-1024.html" target="_blank">
-      <div class="frame checker">
+    <div class="card span4">
+      <a class="frame checker" href="formats/badge-1024.html" target="_blank" aria-label="Ouvrir le badge Je vote en taille réelle">
         <div class="thumb" style="width:340px;height:340px;">
           <iframe src="formats/badge-1024.html" style="width:1024px;height:1024px;transform:scale(0.33203);background:transparent;" scrolling="no"></iframe>
         </div>
-      </div>
+      </a>
       <div class="cap">
         <div class="nm">Badge « Je vote »</div>
         <div class="dim">Rond · 1024 × 1024 px · fond transparent</div>
         <div class="desc">Pin de campagne à coller partout. Fond transparent (damier = transparence).</div>
+        <div class="actions">
+          <a class="act dl" href="exports/badge-1024.png" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
+            Télécharger le PNG
+          </a>
+          <a class="act ghost" href="formats/badge-1024.html" target="_blank">Ouvrir en grand</a>
+        </div>
       </div>
-    </a>
+    </div>
 
     <!-- Badge trompettistes -->
-    <a class="card span4" href="formats/badge-trompettistes-1024.html" target="_blank">
-      <div class="frame checker">
+    <div class="card span4">
+      <a class="frame checker" href="formats/badge-trompettistes-1024.html" target="_blank" aria-label="Ouvrir le badge Trompettistes en taille réelle">
         <div class="thumb" style="width:340px;height:340px;">
           <iframe src="formats/badge-trompettistes-1024.html" style="width:1024px;height:1024px;transform:scale(0.33203);background:transparent;" scrolling="no"></iframe>
         </div>
-      </div>
+      </a>
       <div class="cap">
         <div class="nm">Badge « Les trompettistes »</div>
         <div class="dim">Rond · 1024 × 1024 px · fond transparent</div>
         <div class="desc">Variante coral. « On va pas se faire avoir par les trompettistes ! »</div>
+        <div class="actions">
+          <a class="act dl" href="exports/badge-trompettistes-1024.png" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
+            Télécharger le PNG
+          </a>
+          <a class="act ghost" href="formats/badge-trompettistes-1024.html" target="_blank">Ouvrir en grand</a>
+        </div>
       </div>
-    </a>
+    </div>
 
     <!-- Slack -->
-    <a class="card span4" href="formats/slack-512.html" target="_blank">
-      <div class="frame">
+    <div class="card span4">
+      <a class="frame" href="formats/slack-512.html" target="_blank" aria-label="Ouvrir la photo Slack en taille réelle">
         <div class="thumb" style="width:340px;height:340px;">
           <iframe src="formats/slack-512.html" style="width:512px;height:512px;transform:scale(0.6640625);" scrolling="no"></iframe>
         </div>
-      </div>
+      </a>
       <div class="cap">
         <div class="nm">Photo de profil Slack</div>
         <div class="dim">Carré · 512 × 512 px</div>
         <div class="desc">Portrait recadré serré, liseré coral, éclair — lisible en miniature.</div>
+        <div class="actions">
+          <a class="act dl" href="exports/slack-512.png" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
+            Télécharger le PNG
+          </a>
+          <a class="act ghost" href="formats/slack-512.html" target="_blank">Ouvrir en grand</a>
+        </div>
       </div>
-    </a>
+    </div>
   </div>
 
   <footer>
