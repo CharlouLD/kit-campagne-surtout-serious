@@ -23,6 +23,25 @@
   .hero h1 .s{color:var(--coral);}
   .hero p{margin:24px 0 0;font-family:var(--body);font-size:20px;line-height:1.5;color:#c3cfe8;max-width:680px;}
 
+  .player{margin-top:32px;display:flex;align-items:center;gap:20px;max-width:620px;
+    background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);
+    border-radius:18px;padding:16px 22px;transition:border-color .2s cubic-bezier(.4,0,.2,1);}
+  .player.playing{border-color:rgba(255,82,82,0.55);}
+  .player .play{flex:none;width:56px;height:56px;border-radius:50%;border:0;cursor:pointer;
+    background:var(--coral);color:#fff;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 22px rgba(255,82,82,0.35);transition:background .2s cubic-bezier(.4,0,.2,1),transform .1s ease;}
+  .player .play:hover{background:var(--coral-deep);}
+  .player .play:active{transform:scale(0.96);}
+  .player .play svg{margin-left:0;}
+  .player .ico-play{margin-left:3px;}
+  .player .ptxt{flex:1;min-width:0;}
+  .player .plabel{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-0.01em;color:#fff;}
+  .player .psub{font-family:var(--body);font-size:13px;line-height:1.4;color:#9fb2da;margin-top:3px;}
+  .player .pbar{margin-top:12px;height:5px;border-radius:999px;background:rgba(255,255,255,0.14);overflow:hidden;cursor:pointer;}
+  .player .pbar span{display:block;height:100%;width:0;background:var(--coral);border-radius:999px;}
+  .player .ptime{flex:none;font-family:var(--mono,monospace);font-size:13px;font-weight:500;color:#8aa0cc;font-variant-numeric:tabular-nums;}
+  @media(max-width:600px){.player{flex-wrap:wrap;}.player .ptime{order:3;}}
+
   .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:28px;}
   .card{grid-column:span 4;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);
     border-radius:20px;overflow:hidden;display:flex;flex-direction:column;
@@ -64,6 +83,20 @@
     <div class="kick"><img src="assets/bolt-coral.png" alt=""><span>Matériel de campagne · Candidat sortant</span></div>
     <h1 class="slogan">Surtout <span class="s">Serious.</span></h1>
     <p>Le kit complet de Charles-Éric pour le mandat numéro quatre. Six formats, une seule série&nbsp;: même palette coral &amp; navy, même typo, même éclair. Cliquez sur un visuel pour l'ouvrir en taille réelle et l'exporter.</p>
+
+    <div class="player" id="player">
+      <button class="play" id="playBtn" type="button" aria-label="Écouter l'allocution de campagne">
+        <svg class="ico-play" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+        <svg class="ico-pause" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" style="display:none"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg>
+      </button>
+      <div class="ptxt">
+        <div class="plabel" id="playLabel">Écouter mon allocution de campagne</div>
+        <div class="psub">Discours du candidat sortant · « Pendant que certains font de la trompette… »</div>
+        <div class="pbar" id="pbar"><span id="pfill"></span></div>
+      </div>
+      <div class="ptime" id="ptime">0:00</div>
+      <audio id="audio" preload="metadata" src="assets/audio/allocution-campagne.mp3"></audio>
+    </div>
   </section>
 
   <div class="grid">
@@ -172,5 +205,26 @@
     <span>Palette : Coral #FF5252 · Navy #153879 / #1E2A3A · Gris #F2F2F2</span>
   </footer>
 </div>
+
+<script>
+(function(){
+  var audio=document.getElementById('audio'),btn=document.getElementById('playBtn'),
+      player=document.getElementById('player'),fill=document.getElementById('pfill'),
+      bar=document.getElementById('pbar'),time=document.getElementById('ptime'),
+      label=document.getElementById('playLabel'),
+      icoPlay=btn.querySelector('.ico-play'),icoPause=btn.querySelector('.ico-pause');
+  function fmt(s){if(isNaN(s))return'0:00';s=Math.floor(s);var m=Math.floor(s/60);var r=s%60;return m+':'+(r<10?'0':'')+r;}
+  btn.addEventListener('click',function(){audio.paused?audio.play():audio.pause();});
+  audio.addEventListener('play',function(){icoPlay.style.display='none';icoPause.style.display='block';player.classList.add('playing');label.textContent='Allocution en cours…';});
+  audio.addEventListener('pause',function(){icoPlay.style.display='block';icoPause.style.display='none';player.classList.remove('playing');label.textContent='Écouter mon allocution de campagne';});
+  audio.addEventListener('ended',function(){fill.style.width='0';time.textContent=fmt(audio.duration);});
+  audio.addEventListener('loadedmetadata',function(){time.textContent=fmt(audio.duration);});
+  audio.addEventListener('timeupdate',function(){
+    var d=audio.duration||0;fill.style.width=(d?audio.currentTime/d*100:0)+'%';
+    time.textContent=fmt(audio.paused?audio.duration-audio.currentTime:audio.currentTime);
+  });
+  bar.addEventListener('click',function(e){var r=bar.getBoundingClientRect();if(audio.duration)audio.currentTime=(e.clientX-r.left)/r.width*audio.duration;});
+})();
+</script>
 </body>
 </html>
