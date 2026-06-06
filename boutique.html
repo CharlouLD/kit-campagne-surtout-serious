@@ -54,6 +54,23 @@
   .cap .dim{font-family:var(--mono,monospace);font-weight:500;font-size:13px;letter-spacing:0.04em;color:#8aa0cc;}
   .cap .desc{font-family:var(--body);font-size:14px;line-height:1.45;color:#a9b8d8;margin-top:2px;}
 
+  /* ===== premium experience card ===== */
+  .card.premium{grid-column:span 2;}
+  .studio.royal{background:radial-gradient(120% 120% at 50% -12%, rgba(255,82,82,0.42) 0%, rgba(255,82,82,0) 46%),radial-gradient(120% 100% at 50% 6%, #1a2c4d 0%, #14233f 58%, #0e1b31 100%);}
+  .studio.royal .portrait{position:relative;z-index:2;height:420px;width:auto;display:block;filter:drop-shadow(0 30px 52px rgba(0,0,0,.5));}
+  .studio.royal .crown{position:absolute;z-index:3;top:30px;left:50%;transform:translateX(-50%);width:78px;color:var(--coral);filter:drop-shadow(0 8px 16px rgba(255,82,82,.35));}
+  .studio.royal .pricetag{position:absolute;z-index:4;top:24px;right:24px;background:var(--coral);color:#fff;text-align:center;
+    font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-0.01em;padding:13px 22px;border-radius:18px;box-shadow:0 12px 28px rgba(255,82,82,.42);}
+  .studio.royal .pricetag small{display:block;font-family:var(--body);font-weight:600;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;opacity:.88;margin-top:2px;}
+  .studio.royal .royal-eb{position:absolute;z-index:3;left:50%;bottom:30px;transform:translateX(-50%);white-space:nowrap;
+    font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:0.2em;font-size:12px;color:#fff;
+    background:rgba(15,27,49,.6);padding:8px 18px;border-radius:999px;}
+  .cap .buy{margin-top:10px;align-self:flex-start;font-family:var(--body);font-weight:700;font-size:14px;text-decoration:none;
+    background:var(--coral);color:#fff;padding:12px 22px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;
+    transition:background .2s cubic-bezier(.4,0,.2,1);}
+  .cap .buy:hover{background:var(--coral-600);}
+  .cap .buy svg{width:16px;height:16px;}
+
   /* ===== shared chest print lockup ===== */
   .lockup{display:flex;flex-direction:column;align-items:center;text-align:center;line-height:1;}
   .lockup .bolt{display:block;margin:0 auto;}
@@ -86,10 +103,36 @@
   <section class="hero">
     <div class="kick"><img src="assets/bolt-coral.png" alt=""><span>Boutique de campagne · Goodies</span></div>
     <h1>Le merch, <span class="s">Surtout Serious.</span></h1>
-    <p>Quatre pièces à porter, poser et offrir. Même slogan, même éclair, même palette&nbsp;: « On va pas se faire avoir par les trompettistes. » À décliner sur tout le bureau.</p>
+    <p>Quatre pièces à porter et poser, et une expérience à réserver. Même slogan, même éclair, même palette&nbsp;: « On va pas se faire avoir par les trompettistes. » À décliner sur tout le bureau, et au-delà.</p>
   </section>
 
   <div class="grid">
+
+    <!-- ============ EXPÉRIENCE PREMIUM ============ -->
+    <div class="card premium">
+      <div class="studio royal">
+        <div class="floor"></div>
+        <svg class="crown" viewBox="0 0 64 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6,46 L10,16 L24,30 L32,7 L40,30 L54,16 L58,46 Z" fill="currentColor"/>
+          <circle cx="10" cy="14" r="3.4" fill="currentColor"/>
+          <circle cx="32" cy="5" r="3.6" fill="currentColor"/>
+          <circle cx="54" cy="14" r="3.4" fill="currentColor"/>
+          <rect x="6" y="44" width="52" height="6" rx="2" fill="currentColor"/>
+        </svg>
+        <div class="pricetag">1&nbsp;500&nbsp;€<small>la journée</small></div>
+        <img class="portrait" src="assets/portrait-cutout.png" alt="Charles-Éric">
+        <div class="royal-eb">Son Altesse Suprême Charles-Éric</div>
+      </div>
+      <div class="cap">
+        <div class="nm">Une journée avec Son Altesse Suprême Charles-Éric</div>
+        <div class="dim">Expérience VIP · 1 personne · 1 journée · 1&nbsp;500&nbsp;€</div>
+        <div class="desc">Accès personnel au candidat sortant pour une journée entière : café d'ouverture, conseils stratégiques, écoute de l'allocution en exclusivité et photo de campagne dédicacée. Surtout Serious, mais avec le sourire.</div>
+        <a class="buy" href="soutiens.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+          Réserver la journée
+        </a>
+      </div>
+    </div>
 
     <!-- ============ T-SHIRT ============ -->
     <div class="card">
