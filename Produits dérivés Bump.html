@@ -20,7 +20,7 @@
   header.top .brand{display:inline-flex;}
   header.top img.logo{height:44px;display:block;}
   header.top .nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-  header.top .nav a{font-family:var(--body);font-weight:600;font-size:15px;color:#c3cfe8;text-decoration:none;padding:9px 17px;border-radius:999px;transition:background .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);}
+  header.top .nav a{font-family:var(--body);font-weight:600;font-size:15px;color:#c3cfe8;text-decoration:none;padding:9px 17px;border-radius:999px;display:inline-flex;align-items:center;transition:background .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);}
   header.top .nav a:hover{color:#fff;background:rgba(255,255,255,0.07);}
   header.top .nav a.active{color:#fff;background:rgba(255,82,82,0.16);box-shadow:inset 0 0 0 1px rgba(255,82,82,0.45);}
   header.top .nav .nav-meta{font-family:var(--body);font-weight:600;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#7d90b8;margin-left:10px;}
@@ -70,6 +70,12 @@
     transition:background .2s cubic-bezier(.4,0,.2,1);}
   .cap .buy:hover{background:var(--coral-600);}
   .cap .buy svg{width:16px;height:16px;}
+  .cap .buy.added{background:#1f8f5f;}
+
+  .cap .shopline{margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
+  .cap .shopline .price{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-0.02em;color:#fff;}
+  .cap .shopline .price .c{color:var(--coral);}
+  .cap .shopline .buy{margin-top:0;}
 
   /* ===== shared chest print lockup ===== */
   .lockup{display:flex;flex-direction:column;align-items:center;text-align:center;line-height:1;}
@@ -96,6 +102,7 @@
       <a href="index.html">Le kit</a>
       <a href="soutiens.html">Mes soutiens</a>
       <a href="Produits dérivés Bump.html" class="active">Boutique</a>
+      <a href="panier.html">Panier <span class="cart-count">0</span></a>
       <span class="nav-meta">Award Fun&nbsp;&amp;&nbsp;Serious · 2026</span>
     </nav>
   </header>
@@ -170,6 +177,13 @@
         <div class="nm">T-shirt « Trompettistes »</div>
         <div class="dim">Coton bio blanc · sérigraphie poitrine</div>
         <div class="desc">La pièce de base de la campagne. Slogan centré, éclair corail, tailles XS&nbsp;→&nbsp;XXL.</div>
+        <div class="shopline">
+          <span class="price">30&nbsp;<span class="c">€</span></span>
+          <button class="buy" type="button" data-add-to-cart data-id="tshirt" data-name="T-shirt « Trompettistes »" data-price="30">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6 5 3H2"/></svg>
+            Ajouter au panier
+          </button>
+        </div>
       </div>
     </div>
 
@@ -222,6 +236,13 @@
         <div class="nm">Hoodie de campagne</div>
         <div class="dim">Molleton navy · poche kangourou</div>
         <div class="desc">La pièce QG pour les longues soirées de dépouillement. Capuche doublée, cordon ivoire.</div>
+        <div class="shopline">
+          <span class="price">55&nbsp;<span class="c">€</span></span>
+          <button class="buy" type="button" data-add-to-cart data-id="hoodie" data-name="Hoodie de campagne" data-price="55">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6 5 3H2"/></svg>
+            Ajouter au panier
+          </button>
+        </div>
       </div>
     </div>
 
@@ -266,6 +287,13 @@
         <div class="nm">Casquette brodée</div>
         <div class="dim">6 panneaux blanc · broderie corail</div>
         <div class="desc">Éclair brodé et chute du slogan sur le devant. Visière courbe, fermeture réglable.</div>
+        <div class="shopline">
+          <span class="price">25&nbsp;<span class="c">€</span></span>
+          <button class="buy" type="button" data-add-to-cart data-id="casquette" data-name="Casquette brodée" data-price="25">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6 5 3H2"/></svg>
+            Ajouter au panier
+          </button>
+        </div>
       </div>
     </div>
 
@@ -298,6 +326,13 @@
         <div class="nm">Tapis de souris</div>
         <div class="dim">Rectangle 24 × 19 cm · base antidérapante</div>
         <div class="desc">Le slogan sous la main toute la journée. Surface tissu, bords surpiqués, fond navy.</div>
+        <div class="shopline">
+          <span class="price">15&nbsp;<span class="c">€</span></span>
+          <button class="buy" type="button" data-add-to-cart data-id="tapis" data-name="Tapis de souris" data-price="15">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6 5 3H2"/></svg>
+            Ajouter au panier
+          </button>
+        </div>
       </div>
     </div>
 
@@ -308,5 +343,6 @@
     <span>Palette : Coral #FF5252 · Navy #153879 / #1E2A3A</span>
   </footer>
 </div>
+<script src="scripts/cart.js"></script>
 </body>
 </html>
