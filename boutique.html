@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boutique — Charles-Éric · Surtout Serious</title>
+<link rel="stylesheet" href="styles/campaign.css">
+<style>
+  body{background:#0f1f3a;color:#fff;
+    background:radial-gradient(120% 70% at 85% -5%, rgba(255,82,82,0.14) 0%, rgba(255,82,82,0) 50%),linear-gradient(170deg,#16335f 0%,#10203c 60%,#0e1b33 100%);
+    min-height:100vh;}
+  .wrap{max-width:1280px;margin:0 auto;padding:72px 48px 96px;}
+
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:14px;}
+  header.top .brand{display:inline-flex;}
+  header.top img.logo{height:44px;display:block;}
+  header.top .nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  header.top .nav a{font-family:var(--body);font-weight:600;font-size:15px;color:#c3cfe8;text-decoration:none;padding:9px 17px;border-radius:999px;transition:background .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);}
+  header.top .nav a:hover{color:#fff;background:rgba(255,255,255,0.07);}
+  header.top .nav a.active{color:#fff;background:rgba(255,82,82,0.16);box-shadow:inset 0 0 0 1px rgba(255,82,82,0.45);}
+  header.top .nav .nav-meta{font-family:var(--body);font-weight:600;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#7d90b8;margin-left:10px;}
+  @media(max-width:600px){header.top .nav .nav-meta{display:none;}}
+
+  .hero{margin:40px 0 48px;border-top:1px solid rgba(255,255,255,0.12);padding-top:40px;}
+  .hero .kick{display:flex;align-items:center;gap:12px;margin-bottom:22px;}
+  .hero .kick img{height:26px;display:block;}
+  .hero .kick span{font-family:var(--body);font-weight:700;font-size:15px;letter-spacing:0.16em;text-transform:uppercase;color:var(--coral);}
+  .hero h1{margin:0;font-family:var(--display);font-weight:900;letter-spacing:-0.035em;line-height:0.92;font-size:84px;}
+  .hero h1 .s{color:var(--coral);}
+  .hero p{margin:24px 0 0;font-family:var(--body);font-size:20px;line-height:1.5;color:#c3cfe8;max-width:720px;}
+  .hero .disc{margin-top:16px;font-family:var(--body);font-size:14px;color:#8aa0cc;}
+
+  .shop{display:grid;grid-template-columns:repeat(12,1fr);gap:28px;}
+  .product{grid-column:span 3;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:20px;overflow:hidden;
+    display:flex;flex-direction:column;transition:border-color .2s cubic-bezier(.4,0,.2,1),transform .2s cubic-bezier(.4,0,.2,1);}
+  .product:hover{border-color:rgba(255,82,82,0.45);transform:translateY(-3px);}
+
+  .mock{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    background:radial-gradient(120% 100% at 50% 22%, #f7f8fb 0%, #e6eaf2 70%, #dde3ee 100%);border-bottom:1px solid rgba(255,255,255,0.08);}
+  .mock svg{width:80%;height:80%;display:block;}
+  .mock .print{position:absolute;display:block;filter:drop-shadow(0 3px 6px rgba(8,18,40,0.28));}
+  .mock .tag{position:absolute;top:14px;left:14px;font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+    color:#fff;background:var(--coral);padding:5px 11px;border-radius:999px;}
+
+  .pinfo{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px;flex:1;}
+  .pinfo .nm{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-0.01em;}
+  .pinfo .sl{font-family:var(--body);font-size:14px;line-height:1.45;color:#a9b8d8;}
+  .pinfo .foot{margin-top:auto;padding-top:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .pinfo .price{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-0.02em;color:#fff;}
+  .pinfo .price .c{color:var(--coral);}
+  .buy{font-family:var(--body);font-weight:700;font-size:14px;text-decoration:none;border:0;cursor:pointer;
+    background:var(--coral);color:#fff;padding:11px 18px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;
+    transition:background .2s cubic-bezier(.4,0,.2,1);}
+  .buy:hover{background:var(--coral-deep);}
+  .buy svg{width:15px;height:15px;}
+
+  /* cart bar */
+  .cartbar{margin-top:40px;background:linear-gradient(158deg,#1D2939 0%,#2C405A 100%);border-radius:20px;padding:24px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+  .cartbar .txt{font-family:var(--body);font-size:15px;color:#c3cfe8;}
+  .cartbar .txt b{color:#fff;font-weight:700;}
+  .cartbar .count{font-family:var(--display);font-weight:800;color:var(--coral);}
+
+  footer{margin-top:56px;border-top:1px solid rgba(255,255,255,0.12);padding-top:28px;
+    font-family:var(--body);font-size:14px;color:#8aa0cc;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+
+  @media(max-width:1024px){.product{grid-column:span 6;}}
+  @media(max-width:900px){.hero h1{font-size:60px;}}
+  @media(max-width:600px){.wrap{padding:48px 24px 72px;}.product{grid-column:span 12;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="index.html"><img class="logo" src="assets/logo-bump-white.png" alt="bump"></a>
+    <nav class="nav">
+      <a href="index.html">Le kit</a>
+      <a href="soutiens.html">Mes soutiens</a>
+      <a href="boutique.html" class="active">Boutique</a>
+      <span class="nav-meta">Award Fun&nbsp;&amp;&nbsp;Serious · 2026</span>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="kick"><img src="assets/bolt-coral.png" alt=""><span>Merch de campagne</span></div>
+    <h1>La <span class="s">boutique.</span></h1>
+    <p>Portez le mandat numéro quatre jusque dans le couloir. Quatre pièces, une seule série : éclair coral, navy sérieux, et le sourire en option (incluse).</p>
+    <p class="disc">Boutique de campagne, concept. Visuels produits indicatifs, articles non commercialisés.</p>
+  </section>
+
+  <section class="shop">
+
+    <!-- Casquette -->
+    <div class="product">
+      <div class="mock">
+        <span class="tag">Édition campagne</span>
+        <svg viewBox="0 0 240 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M64,150 C40,152 38,182 70,184 L170,184 C202,182 200,152 176,150 Z" fill="#16202e"/>
+          <path d="M56,154 C56,84 184,84 184,154 Z" fill="#1E2A3A"/>
+          <path d="M120,150 C100,150 92,118 96,98" stroke="#2c3e54" stroke-width="2" opacity=".55"/>
+          <path d="M120,150 C140,150 148,118 144,98" stroke="#2c3e54" stroke-width="2" opacity=".55"/>
+          <circle cx="120" cy="88" r="6" fill="#243345"/>
+        </svg>
+        <img class="print" src="assets/bolt-coral.png" alt="" style="width:30px;top:53%;left:50%;transform:translate(-50%,-50%);">
+      </div>
+      <div class="pinfo">
+        <div class="nm">Casquette « Surtout Serious »</div>
+        <div class="sl">Navy structurée, éclair coral brodé en façade. Pour garder la tête froide.</div>
+        <div class="foot">
+          <div class="price">25&nbsp;<span class="c">€</span></div>
+          <button class="buy" type="button" data-add="Casquette">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6 5 3H2"/></svg>
+            Commander
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- T-shirt -->
+    <div class="product">
+      <div class="mock">
+        <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M88,36 C90,54 150,54 152,36 L178,46 L214,70 L194,106 L174,94 L174,208 L66,208 L66,94 L46,106 L26,70 L62,46 Z" fill="#1E2A3A"/>
+          <path d="M88,36 C92,58 148,58 152,36 C150,70 90,70 88,36 Z" fill="#16202e"/>
+          <path d="M174,94 L174,208 L150,208 L150,100 Z" fill="#18222f"/>
+        </svg>
+        <img class="print" src="assets/bolt-coral.png" alt="" style="width:34px;top:46%;left:50%;transform:translate(-50%,-50%);">
+      </div>
+      <div class="pinfo">
+        <div class="nm">T-shirt éclair</div>
+        <div class="sl">Coton lourd navy, éclair coral floqué cœur de poitrine. La pièce de base du militant.</div>
+        <div class="foot">
+          <div class="price">30&nbsp;<span class="c">€</span></div>
+          <button class="buy" type="button" data-add="T-shirt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6 5 3H2"/></svg>
+            Commander
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hoodie -->
+    <div class="product">
+      <div class="mock">
+        <span class="tag">Best-seller</span>
+        <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M84,42 C86,72 154,72 156,42 C180,50 200,66 208,90 L188,120 L172,108 L172,212 L68,212 L68,108 L52,120 L32,90 C40,66 60,50 84,42 Z" fill="#1E2A3A"/>
+          <path d="M92,46 C98,80 142,80 148,46 C152,74 140,90 120,90 C100,90 88,74 92,46 Z" fill="#111924"/>
+          <path d="M84,152 L156,152 L164,200 L76,200 Z" fill="#18222f"/>
+          <line x1="110" y1="84" x2="106" y2="124" stroke="#cdd7ea" stroke-width="4" stroke-linecap="round"/>
+          <line x1="130" y1="84" x2="134" y2="124" stroke="#cdd7ea" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="106" cy="126" r="3.4" fill="#aab7d2"/>
+          <circle cx="134" cy="126" r="3.4" fill="#aab7d2"/>
+        </svg>
+        <img class="print" src="assets/bolt-coral.png" alt="" style="width:30px;top:41%;left:50%;transform:translate(-50%,-50%);">
+      </div>
+      <div class="pinfo">
+        <div class="nm">Hoodie « Le mandat N°4 »</div>
+        <div class="sl">Molleton gratté, capuche doublée. Pour les longues soirées de dépouillement.</div>
+        <div class="foot">
+          <div class="price">55&nbsp;<span class="c">€</span></div>
+          <button class="buy" type="button" data-add="Hoodie">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6 5 3H2"/></svg>
+            Commander
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mug -->
+    <div class="product">
+      <div class="mock">
+        <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M158,98 C196,98 196,158 158,158" stroke="#1E2A3A" stroke-width="16" fill="none"/>
+          <path d="M70,76 L150,76 C156,76 160,80 160,86 L160,184 C160,190 156,194 150,194 L80,194 C74,194 70,190 70,184 Z" fill="#1E2A3A"/>
+          <ellipse cx="115" cy="76" rx="45" ry="11" fill="#111924"/>
+          <ellipse cx="115" cy="76" rx="33" ry="7" fill="#0c141d"/>
+          <path d="M70,86 L70,184 C70,190 74,194 80,194 L90,194 L90,80 Z" fill="#243345" opacity="0.5"/>
+        </svg>
+        <img class="print" src="assets/bolt-coral.png" alt="" style="width:26px;top:53%;left:48%;transform:translate(-50%,-50%);">
+      </div>
+      <div class="pinfo">
+        <div class="nm">Mug « Jamais à plat »</div>
+        <div class="sl">Céramique navy, éclair coral. Zéro émission de bullshit, même au café.</div>
+        <div class="foot">
+          <div class="price">15&nbsp;<span class="c">€</span></div>
+          <button class="buy" type="button" data-add="Mug">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6 5 3H2"/></svg>
+            Commander
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="cartbar">
+    <div class="txt">Panier de campagne : <span class="count" id="cartCount">0 article</span>. <b id="cartTotal">0 €</b></div>
+    <div class="txt">Concept de boutique : la commande n'est pas réellement enregistrée.</div>
+  </section>
+
+  <footer>
+    <span>Charles-Éric · Le mandat numéro quatre · Award Fun&nbsp;&amp;&nbsp;Serious 2026</span>
+    <span>Palette : Coral #FF5252 · Navy #153879 / #1E2A3A · Gris #F2F2F2</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var prices={Casquette:25,"T-shirt":30,Hoodie:55,Mug:15};
+  var count=0,total=0;
+  var cEl=document.getElementById('cartCount'),tEl=document.getElementById('cartTotal');
+  document.querySelectorAll('.buy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var p=b.getAttribute('data-add');count++;total+=prices[p]||0;
+      cEl.textContent=count+(count>1?' articles':' article');
+      tEl.textContent=total+' €';
+      var old=b.innerHTML;b.textContent='Ajouté';
+      setTimeout(function(){b.innerHTML=old;},900);
+    });
+  });
+})();
+</script>
+</body>
+</html>
