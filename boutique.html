@@ -3,12 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Boutique — Charles-Éric · Surtout Serious</title>
+<title>Produits dérivés — Charles-Éric · Surtout Serious</title>
 <link rel="stylesheet" href="styles/campaign.css">
 <style>
-  body{background:#0f1f3a;color:#fff;
+  :root{
+    --coral:#FF5252; --coral-600:#F03A3A;
+    --navy:#153879; --navy-800:#1D2939; --ink:#0F172A;
+  }
+  body{
     background:radial-gradient(120% 70% at 85% -5%, rgba(255,82,82,0.14) 0%, rgba(255,82,82,0) 50%),linear-gradient(170deg,#16335f 0%,#10203c 60%,#0e1b33 100%);
-    min-height:100vh;}
+    color:#fff; min-height:100vh;
+  }
   .wrap{max-width:1280px;margin:0 auto;padding:72px 48px 96px;}
 
   header.top{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:14px;}
@@ -21,52 +26,49 @@
   header.top .nav .nav-meta{font-family:var(--body);font-weight:600;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#7d90b8;margin-left:10px;}
   @media(max-width:600px){header.top .nav .nav-meta{display:none;}}
 
-  .hero{margin:40px 0 48px;border-top:1px solid rgba(255,255,255,0.12);padding-top:40px;}
-  .hero .kick{display:flex;align-items:center;gap:12px;margin-bottom:22px;}
-  .hero .kick img{height:26px;display:block;}
-  .hero .kick span{font-family:var(--body);font-weight:700;font-size:15px;letter-spacing:0.16em;text-transform:uppercase;color:var(--coral);}
-  .hero h1{margin:0;font-family:var(--display);font-weight:900;letter-spacing:-0.035em;line-height:0.92;font-size:84px;}
+  .hero{margin:40px 0 56px;border-top:1px solid rgba(255,255,255,0.12);padding-top:40px;}
+  .hero .kick{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+  .hero .kick img{height:24px;display:block;}
+  .hero .kick span{font-family:var(--body);font-weight:700;font-size:14px;letter-spacing:0.16em;text-transform:uppercase;color:var(--coral);}
+  .hero h1{margin:0;font-family:var(--display);font-weight:900;letter-spacing:-0.035em;line-height:0.94;font-size:72px;}
   .hero h1 .s{color:var(--coral);}
-  .hero p{margin:24px 0 0;font-family:var(--body);font-size:20px;line-height:1.5;color:#c3cfe8;max-width:720px;}
-  .hero .disc{margin-top:16px;font-family:var(--body);font-size:14px;color:#8aa0cc;}
+  .hero p{margin:22px 0 0;font-family:var(--body);font-size:19px;line-height:1.5;color:#c3cfe8;max-width:660px;}
 
-  .shop{display:grid;grid-template-columns:repeat(12,1fr);gap:28px;}
-  .product{grid-column:span 3;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:20px;overflow:hidden;
-    display:flex;flex-direction:column;transition:border-color .2s cubic-bezier(.4,0,.2,1),transform .2s cubic-bezier(.4,0,.2,1);}
-  .product:hover{border-color:rgba(255,82,82,0.45);transform:translateY(-3px);}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+  .card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);
+    border-radius:22px;overflow:hidden;display:flex;flex-direction:column;
+    transition:border-color .2s cubic-bezier(.4,0,.2,1),transform .2s cubic-bezier(.4,0,.2,1);}
+  .card:hover{border-color:rgba(255,82,82,0.45);transform:translateY(-3px);}
 
-  .mock{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;overflow:hidden;
-    background:radial-gradient(120% 100% at 50% 22%, #f7f8fb 0%, #e6eaf2 70%, #dde3ee 100%);border-bottom:1px solid rgba(255,255,255,0.08);}
-  .mock svg{width:80%;height:80%;display:block;}
-  .mock .print{position:absolute;display:block;filter:drop-shadow(0 3px 6px rgba(8,18,40,0.28));}
-  .mock .tag{position:absolute;top:14px;left:14px;font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
-    color:#fff;background:var(--coral);padding:5px 11px;border-radius:999px;}
+  /* product studio tile */
+  .studio{height:460px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+    border-bottom:1px solid rgba(255,255,255,0.08);}
+  .studio.light{background:radial-gradient(120% 100% at 50% 8%, #FBFCFE 0%, #EDF0F5 58%, #E2E7EF 100%);}
+  .studio.dark{background:radial-gradient(120% 100% at 50% 6%, #1a2c4d 0%, #14233f 60%, #0e1b31 100%);}
+  .studio .floor{position:absolute;left:50%;bottom:54px;transform:translateX(-50%);width:62%;height:46px;border-radius:50%;
+    background:radial-gradient(ellipse at center, rgba(15,25,45,.30) 0%, rgba(15,25,45,0) 70%);filter:blur(7px);}
+  .studio.dark .floor{background:radial-gradient(ellipse at center, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 70%);}
 
-  .pinfo{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px;flex:1;}
-  .pinfo .nm{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-0.01em;}
-  .pinfo .sl{font-family:var(--body);font-size:14px;line-height:1.45;color:#a9b8d8;}
-  .pinfo .foot{margin-top:auto;padding-top:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
-  .pinfo .price{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-0.02em;color:#fff;}
-  .pinfo .price .c{color:var(--coral);}
-  .buy{font-family:var(--body);font-weight:700;font-size:14px;text-decoration:none;border:0;cursor:pointer;
-    background:var(--coral);color:#fff;padding:11px 18px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;
-    transition:background .2s cubic-bezier(.4,0,.2,1);}
-  .buy:hover{background:var(--coral-deep);}
-  .buy svg{width:15px;height:15px;}
+  .cap{padding:22px 24px 24px;display:flex;flex-direction:column;gap:6px;}
+  .cap .nm{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-0.01em;}
+  .cap .dim{font-family:var(--mono,monospace);font-weight:500;font-size:13px;letter-spacing:0.04em;color:#8aa0cc;}
+  .cap .desc{font-family:var(--body);font-size:14px;line-height:1.45;color:#a9b8d8;margin-top:2px;}
 
-  /* cart bar */
-  .cartbar{margin-top:40px;background:linear-gradient(158deg,#1D2939 0%,#2C405A 100%);border-radius:20px;padding:24px 28px;
-    display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
-  .cartbar .txt{font-family:var(--body);font-size:15px;color:#c3cfe8;}
-  .cartbar .txt b{color:#fff;font-weight:700;}
-  .cartbar .count{font-family:var(--display);font-weight:800;color:var(--coral);}
+  /* ===== shared chest print lockup ===== */
+  .lockup{display:flex;flex-direction:column;align-items:center;text-align:center;line-height:1;}
+  .lockup .bolt{display:block;margin:0 auto;}
+  .lockup .eb{font-family:var(--display);font-weight:700;text-transform:uppercase;color:var(--coral-600);}
+  .lockup .ttl{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;}
+  .lockup .ttl .pn{color:var(--coral-600);letter-spacing:-0.03em;}
 
-  footer{margin-top:56px;border-top:1px solid rgba(255,255,255,0.12);padding-top:28px;
+  footer{margin-top:60px;border-top:1px solid rgba(255,255,255,0.12);padding-top:28px;
     font-family:var(--body);font-size:14px;color:#8aa0cc;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;}
 
-  @media(max-width:1024px){.product{grid-column:span 6;}}
-  @media(max-width:900px){.hero h1{font-size:60px;}}
-  @media(max-width:600px){.wrap{padding:48px 24px 72px;}.product{grid-column:span 12;}}
+  @media(max-width:880px){
+    .grid{grid-template-columns:1fr;}
+    .hero h1{font-size:52px;}
+    .wrap{padding:48px 24px 72px;}
+  }
 </style>
 </head>
 <body>
@@ -82,144 +84,186 @@
   </header>
 
   <section class="hero">
-    <div class="kick"><img src="assets/bolt-coral.png" alt=""><span>Merch de campagne</span></div>
-    <h1>La <span class="s">boutique.</span></h1>
-    <p>Portez le mandat numéro quatre jusque dans le couloir. Quatre pièces, une seule série : éclair coral, navy sérieux, et le sourire en option (incluse).</p>
-    <p class="disc">Boutique de campagne, concept. Visuels produits indicatifs, articles non commercialisés.</p>
+    <div class="kick"><img src="assets/bolt-coral.png" alt=""><span>Boutique de campagne · Goodies</span></div>
+    <h1>Le merch, <span class="s">Surtout Serious.</span></h1>
+    <p>Quatre pièces à porter, poser et offrir. Même slogan, même éclair, même palette&nbsp;: « On va pas se faire avoir par les trompettistes. » À décliner sur tout le bureau.</p>
   </section>
 
-  <section class="shop">
+  <div class="grid">
 
-    <!-- Casquette -->
-    <div class="product">
-      <div class="mock">
-        <span class="tag">Édition campagne</span>
-        <svg viewBox="0 0 240 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M64,150 C40,152 38,182 70,184 L170,184 C202,182 200,152 176,150 Z" fill="#16202e"/>
-          <path d="M56,154 C56,84 184,84 184,154 Z" fill="#1E2A3A"/>
-          <path d="M120,150 C100,150 92,118 96,98" stroke="#2c3e54" stroke-width="2" opacity=".55"/>
-          <path d="M120,150 C140,150 148,118 144,98" stroke="#2c3e54" stroke-width="2" opacity=".55"/>
-          <circle cx="120" cy="88" r="6" fill="#243345"/>
+    <!-- ============ T-SHIRT ============ -->
+    <div class="card">
+      <div class="studio light">
+        <div class="floor"></div>
+        <svg width="360" height="360" viewBox="0 0 360 380" data-screen-label="T-shirt">
+          <defs>
+            <linearGradient id="tee" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#D8DDE5"/><stop offset="0.07" stop-color="#EFF2F6"/>
+              <stop offset="0.3" stop-color="#FFFFFF"/><stop offset="0.7" stop-color="#F3F5F8"/>
+              <stop offset="0.93" stop-color="#E4E8EE"/><stop offset="1" stop-color="#D2D8E1"/>
+            </linearGradient>
+          </defs>
+          <path d="M148,46 C158,60 202,60 212,46 L246,42 C262,44 286,60 318,88 C322,92 322,100 318,106
+                   L292,142 C288,146 282,146 278,142 L262,126 L266,348 C266,354 262,358 256,358
+                   L104,358 C98,358 94,354 94,348 L98,126 L82,142 C78,146 72,146 68,142
+                   L42,106 C38,100 38,92 42,88 C74,60 98,44 114,42 Z"
+                fill="url(#tee)" stroke="#C8CFDA" stroke-width="1.5" stroke-linejoin="round"/>
+          <!-- collar ribbing -->
+          <path d="M150,48 C160,64 200,64 210,48" fill="none" stroke="#C6CDD8" stroke-width="3" stroke-linecap="round"/>
+          <!-- sleeve cuff seams -->
+          <path d="M70,138 L96,124" stroke="#D3D9E2" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+          <path d="M290,138 L264,124" stroke="#D3D9E2" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+          <!-- soft fold shading -->
+          <path d="M132,150 C150,300 150,300 140,356" stroke="#E2E6EC" stroke-width="10" fill="none" opacity="0.6" stroke-linecap="round"/>
+          <path d="M228,150 C214,300 214,300 222,356" stroke="#E2E6EC" stroke-width="10" fill="none" opacity="0.6" stroke-linecap="round"/>
         </svg>
-        <img class="print" src="assets/bolt-coral.png" alt="" style="width:30px;top:53%;left:50%;transform:translate(-50%,-50%);">
-      </div>
-      <div class="pinfo">
-        <div class="nm">Casquette « Surtout Serious »</div>
-        <div class="sl">Navy structurée, éclair coral brodé en façade. Pour garder la tête froide.</div>
-        <div class="foot">
-          <div class="price">25&nbsp;<span class="c">€</span></div>
-          <button class="buy" type="button" data-add="Casquette">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6 5 3H2"/></svg>
-            Commander
-          </button>
+        <div class="lockup" style="position:absolute;top:158px;left:50%;transform:translateX(-50%);width:150px;">
+          <span class="bolt" style="width:30px;margin-bottom:10px;"><img src="assets/bolt-coral.png" alt="" style="width:100%;display:block;"></span>
+          <span class="eb" style="font-size:8.5px;letter-spacing:.2em;margin-bottom:7px;">Bump Awards 2026</span>
+          <span class="ttl" style="font-size:14.5px;line-height:1.04;color:var(--navy-800);">On va pas se faire avoir par les <span class="pn">trompettistes</span></span>
         </div>
+      </div>
+      <div class="cap">
+        <div class="nm">T-shirt « Trompettistes »</div>
+        <div class="dim">Coton bio blanc · sérigraphie poitrine</div>
+        <div class="desc">La pièce de base de la campagne. Slogan centré, éclair corail, tailles XS&nbsp;→&nbsp;XXL.</div>
       </div>
     </div>
 
-    <!-- T-shirt -->
-    <div class="product">
-      <div class="mock">
-        <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M88,36 C90,54 150,54 152,36 L178,46 L214,70 L194,106 L174,94 L174,208 L66,208 L66,94 L46,106 L26,70 L62,46 Z" fill="#1E2A3A"/>
-          <path d="M88,36 C92,58 148,58 152,36 C150,70 90,70 88,36 Z" fill="#16202e"/>
-          <path d="M174,94 L174,208 L150,208 L150,100 Z" fill="#18222f"/>
+    <!-- ============ HOODIE ============ -->
+    <div class="card">
+      <div class="studio dark">
+        <div class="floor"></div>
+        <svg width="370" height="370" viewBox="0 0 380 400" data-screen-label="Hoodie">
+          <defs>
+            <linearGradient id="hood" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#0E2148"/><stop offset="0.08" stop-color="#15326A"/>
+              <stop offset="0.34" stop-color="#1C4288"/><stop offset="0.66" stop-color="#173B7C"/>
+              <stop offset="0.92" stop-color="#122C5E"/><stop offset="1" stop-color="#0C1E42"/>
+            </linearGradient>
+          </defs>
+          <!-- hood behind -->
+          <path d="M132,70 C150,30 230,30 248,70 C262,100 250,128 226,134 L154,134 C130,128 118,100 132,70 Z"
+                fill="#102A58" stroke="#0C1F44" stroke-width="1.5"/>
+          <!-- body + sleeves -->
+          <path d="M150,96 C162,118 218,118 230,96 L262,104 C286,112 312,132 340,164 C344,168 344,176 340,182
+                   L312,224 C308,228 302,228 298,224 L280,200 L286,366 C286,374 280,380 272,380
+                   L108,380 C100,380 94,374 94,366 L100,200 L82,224 C78,228 72,228 68,224
+                   L40,182 C36,176 36,168 40,164 C68,132 94,112 118,104 Z"
+                fill="url(#hood)" stroke="#0C1F44" stroke-width="1.5" stroke-linejoin="round"/>
+          <!-- hood opening -->
+          <path d="M150,96 C162,124 218,124 230,96 C236,112 232,140 190,146 C148,140 144,112 150,96 Z"
+                fill="#0B1C3C"/>
+          <!-- kangaroo pocket -->
+          <path d="M126,286 L254,286 C258,286 260,288 260,292 L256,344 C256,348 252,350 248,350 L132,350 C128,350 124,348 124,344 L120,292 C120,288 122,286 126,286 Z"
+                fill="none" stroke="#0E2349" stroke-width="3" opacity="0.9"/>
+          <!-- drawstrings -->
+          <path d="M168,138 L162,210" stroke="#E7ECF4" stroke-width="4" stroke-linecap="round"/>
+          <path d="M212,138 L218,210" stroke="#E7ECF4" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="162" cy="214" r="4.5" fill="#CFD7E2"/>
+          <circle cx="218" cy="214" r="4.5" fill="#CFD7E2"/>
+          <!-- ribbed cuffs + hem -->
+          <path d="M70,222 L100,200" stroke="#0E2349" stroke-width="3" stroke-linecap="round"/>
+          <path d="M310,222 L280,200" stroke="#0E2349" stroke-width="3" stroke-linecap="round"/>
+          <!-- fold highlights -->
+          <path d="M150,160 C166,300 166,300 156,374" stroke="#1E468F" stroke-width="9" fill="none" opacity="0.55" stroke-linecap="round"/>
+          <path d="M230,160 C216,300 216,300 224,374" stroke="#102C5C" stroke-width="9" fill="none" opacity="0.6" stroke-linecap="round"/>
         </svg>
-        <img class="print" src="assets/bolt-coral.png" alt="" style="width:34px;top:46%;left:50%;transform:translate(-50%,-50%);">
-      </div>
-      <div class="pinfo">
-        <div class="nm">T-shirt éclair</div>
-        <div class="sl">Coton lourd navy, éclair coral floqué cœur de poitrine. La pièce de base du militant.</div>
-        <div class="foot">
-          <div class="price">30&nbsp;<span class="c">€</span></div>
-          <button class="buy" type="button" data-add="T-shirt">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6 5 3H2"/></svg>
-            Commander
-          </button>
+        <div class="lockup" style="position:absolute;top:212px;left:50%;transform:translateX(-50%);width:138px;">
+          <span class="bolt" style="width:28px;margin-bottom:9px;"><img src="assets/bolt-coral.png" alt="" style="width:100%;display:block;"></span>
+          <span class="eb" style="font-size:8px;letter-spacing:.2em;margin-bottom:6px;color:#FF6A6A;">Surtout Serious</span>
+          <span class="ttl" style="font-size:13px;line-height:1.05;color:#EAF0F8;">On va pas se faire avoir par les <span class="pn" style="color:#FF6A6A;">trompettistes</span></span>
         </div>
+      </div>
+      <div class="cap">
+        <div class="nm">Hoodie de campagne</div>
+        <div class="dim">Molleton navy · poche kangourou</div>
+        <div class="desc">La pièce QG pour les longues soirées de dépouillement. Capuche doublée, cordon ivoire.</div>
       </div>
     </div>
 
-    <!-- Hoodie -->
-    <div class="product">
-      <div class="mock">
-        <span class="tag">Best-seller</span>
-        <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M84,42 C86,72 154,72 156,42 C180,50 200,66 208,90 L188,120 L172,108 L172,212 L68,212 L68,108 L52,120 L32,90 C40,66 60,50 84,42 Z" fill="#1E2A3A"/>
-          <path d="M92,46 C98,80 142,80 148,46 C152,74 140,90 120,90 C100,90 88,74 92,46 Z" fill="#111924"/>
-          <path d="M84,152 L156,152 L164,200 L76,200 Z" fill="#18222f"/>
-          <line x1="110" y1="84" x2="106" y2="124" stroke="#cdd7ea" stroke-width="4" stroke-linecap="round"/>
-          <line x1="130" y1="84" x2="134" y2="124" stroke="#cdd7ea" stroke-width="4" stroke-linecap="round"/>
-          <circle cx="106" cy="126" r="3.4" fill="#aab7d2"/>
-          <circle cx="134" cy="126" r="3.4" fill="#aab7d2"/>
+    <!-- ============ CASQUETTE ============ -->
+    <div class="card">
+      <div class="studio light">
+        <div class="floor" style="bottom:96px;width:46%;"></div>
+        <svg width="340" height="300" viewBox="0 0 340 300" data-screen-label="Casquette">
+          <defs>
+            <linearGradient id="capg" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#DCE1E8"/><stop offset="0.1" stop-color="#F1F3F7"/>
+              <stop offset="0.4" stop-color="#FFFFFF"/><stop offset="0.75" stop-color="#F0F3F7"/>
+              <stop offset="1" stop-color="#DBE0E8"/>
+            </linearGradient>
+            <linearGradient id="brim" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#EFF2F6"/><stop offset="1" stop-color="#D2D8E2"/>
+            </linearGradient>
+          </defs>
+          <!-- brim -->
+          <path d="M64,196 C64,250 120,272 170,272 C220,272 276,250 276,196 C276,210 240,222 170,222 C100,222 64,210 64,196 Z"
+                fill="url(#brim)" stroke="#C6CDD8" stroke-width="1.5" stroke-linejoin="round"/>
+          <!-- crown -->
+          <path d="M58,200 C58,116 102,64 170,64 C238,64 282,116 282,200 C282,210 240,218 170,218 C100,218 58,210 58,200 Z"
+                fill="url(#capg)" stroke="#C6CDD8" stroke-width="1.5" stroke-linejoin="round"/>
+          <!-- panel seams -->
+          <path d="M170,66 L170,216" stroke="#DDE2EA" stroke-width="2" opacity="0.8"/>
+          <path d="M118,74 C110,140 110,180 116,212" stroke="#DDE2EA" stroke-width="2" fill="none" opacity="0.7"/>
+          <path d="M222,74 C230,140 230,180 224,212" stroke="#DDE2EA" stroke-width="2" fill="none" opacity="0.7"/>
+          <!-- top button -->
+          <circle cx="170" cy="66" r="7" fill="#EAEEF3" stroke="#CBD2DC" stroke-width="1.5"/>
+          <!-- eyelets -->
+          <circle cx="146" cy="120" r="2.4" fill="#C6CDD8"/>
+          <circle cx="194" cy="120" r="2.4" fill="#C6CDD8"/>
         </svg>
-        <img class="print" src="assets/bolt-coral.png" alt="" style="width:30px;top:41%;left:50%;transform:translate(-50%,-50%);">
-      </div>
-      <div class="pinfo">
-        <div class="nm">Hoodie « Le mandat N°4 »</div>
-        <div class="sl">Molleton gratté, capuche doublée. Pour les longues soirées de dépouillement.</div>
-        <div class="foot">
-          <div class="price">55&nbsp;<span class="c">€</span></div>
-          <button class="buy" type="button" data-add="Hoodie">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6 5 3H2"/></svg>
-            Commander
-          </button>
+        <!-- embroidered front -->
+        <div class="lockup" style="position:absolute;top:128px;left:50%;transform:translateX(-50%);width:160px;">
+          <span class="bolt" style="width:34px;margin-bottom:10px;"><img src="assets/bolt-coral.png" alt="" style="width:100%;display:block;"></span>
+          <span class="ttl" style="font-size:21px;font-weight:800;letter-spacing:-0.025em;color:var(--coral-600);">Trompettistes</span>
         </div>
+      </div>
+      <div class="cap">
+        <div class="nm">Casquette brodée</div>
+        <div class="dim">6 panneaux blanc · broderie corail</div>
+        <div class="desc">Éclair brodé et chute du slogan sur le devant. Visière courbe, fermeture réglable.</div>
       </div>
     </div>
 
-    <!-- Mug -->
-    <div class="product">
-      <div class="mock">
-        <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M158,98 C196,98 196,158 158,158" stroke="#1E2A3A" stroke-width="16" fill="none"/>
-          <path d="M70,76 L150,76 C156,76 160,80 160,86 L160,184 C160,190 156,194 150,194 L80,194 C74,194 70,190 70,184 Z" fill="#1E2A3A"/>
-          <ellipse cx="115" cy="76" rx="45" ry="11" fill="#111924"/>
-          <ellipse cx="115" cy="76" rx="33" ry="7" fill="#0c141d"/>
-          <path d="M70,86 L70,184 C70,190 74,194 80,194 L90,194 L90,80 Z" fill="#243345" opacity="0.5"/>
-        </svg>
-        <img class="print" src="assets/bolt-coral.png" alt="" style="width:26px;top:53%;left:48%;transform:translate(-50%,-50%);">
-      </div>
-      <div class="pinfo">
-        <div class="nm">Mug « Jamais à plat »</div>
-        <div class="sl">Céramique navy, éclair coral. Zéro émission de bullshit, même au café.</div>
-        <div class="foot">
-          <div class="price">15&nbsp;<span class="c">€</span></div>
-          <button class="buy" type="button" data-add="Mug">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6 5 3H2"/></svg>
-            Commander
-          </button>
+    <!-- ============ TAPIS DE SOURIS ============ -->
+    <div class="card">
+      <div class="studio dark">
+        <div class="floor" style="bottom:120px;width:60%;"></div>
+        <div data-screen-label="Tapis de souris" style="position:relative;width:330px;height:200px;transform:rotate(-3deg);
+              border-radius:16px;
+              background:radial-gradient(120% 140% at 22% 12%, #1B3C7C 0%, #15326A 42%, #112A58 100%);
+              box-shadow:0 24px 40px -10px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.06), inset 0 1px 0 rgba(255,255,255,.10);
+              overflow:hidden;">
+          <!-- stitched edge -->
+          <div style="position:absolute;inset:7px;border-radius:11px;border:1.5px dashed rgba(255,255,255,.18);"></div>
+          <!-- faint bolt watermark -->
+          <img src="assets/bolt-white.png" alt="" style="position:absolute;right:-26px;bottom:-34px;width:180px;opacity:.06;transform:rotate(-8deg);">
+          <!-- content -->
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 30px;">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px;">
+              <img src="assets/bolt-coral.png" alt="" style="width:22px;display:block;">
+              <span style="font-family:var(--display);font-weight:700;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#9fb2da;">Surtout Serious</span>
+            </div>
+            <div style="font-family:var(--display);font-weight:800;font-size:23px;line-height:1.04;letter-spacing:-0.02em;color:#fff;text-transform:uppercase;">
+              On va pas se<br>faire avoir par les<br><span style="color:#FF6A6A;">trompettistes</span>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="cap">
+        <div class="nm">Tapis de souris</div>
+        <div class="dim">Rectangle 24 × 19 cm · base antidérapante</div>
+        <div class="desc">Le slogan sous la main toute la journée. Surface tissu, bords surpiqués, fond navy.</div>
       </div>
     </div>
 
-  </section>
-
-  <section class="cartbar">
-    <div class="txt">Panier de campagne : <span class="count" id="cartCount">0 article</span>. <b id="cartTotal">0 €</b></div>
-    <div class="txt">Concept de boutique : la commande n'est pas réellement enregistrée.</div>
-  </section>
+  </div>
 
   <footer>
     <span>Charles-Éric · Le mandat numéro quatre · Award Fun&nbsp;&amp;&nbsp;Serious 2026</span>
-    <span>Palette : Coral #FF5252 · Navy #153879 / #1E2A3A · Gris #F2F2F2</span>
+    <span>Palette : Coral #FF5252 · Navy #153879 / #1E2A3A</span>
   </footer>
 </div>
-
-<script>
-(function(){
-  var prices={Casquette:25,"T-shirt":30,Hoodie:55,Mug:15};
-  var count=0,total=0;
-  var cEl=document.getElementById('cartCount'),tEl=document.getElementById('cartTotal');
-  document.querySelectorAll('.buy').forEach(function(b){
-    b.addEventListener('click',function(){
-      var p=b.getAttribute('data-add');count++;total+=prices[p]||0;
-      cEl.textContent=count+(count>1?' articles':' article');
-      tEl.textContent=total+' €';
-      var old=b.innerHTML;b.textContent='Ajouté';
-      setTimeout(function(){b.innerHTML=old;},900);
-    });
-  });
-})();
-</script>
 </body>
 </html>
