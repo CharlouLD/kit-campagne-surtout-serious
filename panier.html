@@ -48,6 +48,24 @@
   .summary .tot{font-family:var(--body);font-size:17px;color:#c3cfe8;}
   .summary .tot b{font-family:var(--display);font-weight:900;font-size:30px;letter-spacing:-0.02em;color:#fff;margin-left:10px;}
   .summary .sumacts{display:flex;gap:12px;flex-wrap:wrap;}
+  .summary .tots{display:flex;flex-direction:column;gap:4px;}
+  .summary .line-sub{font-family:var(--body);font-size:14px;color:#9fb2da;}
+  .summary .line-sub span{color:#c3cfe8;font-weight:600;margin-left:6px;}
+  .summary .line-disc{font-family:var(--body);font-size:14px;font-weight:700;color:#ff9a9a;}
+  .summary .line-disc span{margin-left:6px;}
+
+  .promo{margin-top:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:18px 20px;}
+  .promo .promo-form{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .promo .promo-form input{flex:1;min-width:180px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);
+    border-radius:999px;padding:12px 18px;color:#fff;font-family:var(--body);font-size:15px;letter-spacing:0.04em;text-transform:uppercase;}
+  .promo .promo-form input::placeholder{color:#7d90b8;letter-spacing:0;text-transform:none;}
+  .promo .promo-form input:focus{outline:none;border-color:rgba(255,82,82,0.6);}
+  .promo .promo-err{display:none;margin-top:10px;font-family:var(--body);font-size:13px;color:#FF8A8A;}
+  .promo .promo-on{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:var(--body);font-size:15px;color:#dbe3f3;}
+  .promo .promo-on .pct{display:inline-block;margin-left:8px;background:var(--coral);color:#fff;font-weight:700;font-size:12px;
+    padding:3px 10px;border-radius:999px;vertical-align:middle;}
+  .promo .linkbtn{background:transparent;border:0;cursor:pointer;color:#9fb2da;font-family:var(--body);font-weight:600;font-size:14px;text-decoration:underline;}
+  .promo .linkbtn:hover{color:#fff;}
   .btn{font-family:var(--body);font-weight:700;font-size:14px;text-decoration:none;border:0;cursor:pointer;
     padding:13px 22px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;
     transition:background .2s cubic-bezier(.4,0,.2,1),border-color .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);}
@@ -107,6 +125,9 @@
 <script>
   function eur(n){ var v = Number.isInteger(n) ? String(n) : n.toFixed(2); return v.replace('.', ',') + ' €'; }
 
+  var PROMO_CODE = 'SURTOUTSERIOUS', PROMO_RATE = 0.5, PROMO_KEY = 'bump_promo';
+  function promoApplied(){ return localStorage.getItem(PROMO_KEY) === '1'; }
+
   window.renderCart = function () {
     var root = document.getElementById('cart-root');
     var items = BumpCart.read();
@@ -132,10 +153,28 @@
       '</div>';
     }).join('');
 
+    var subtotal = BumpCart.total();
+    var applied = promoApplied();
+    var discount = applied ? subtotal * PROMO_RATE : 0;
+    var grand = subtotal - discount;
+
+    var promoBlock = applied
+      ? '<div class="promo"><div class="promo-on"><span>Code <b>' + PROMO_CODE + '</b> appliqué<span class="pct">-50 %</span></span>' +
+          '<button class="linkbtn" id="promoRemove">Retirer</button></div></div>'
+      : '<div class="promo"><div class="promo-form">' +
+          '<input id="promoInput" type="text" placeholder="Code promo" autocomplete="off" spellcheck="false">' +
+          '<button class="btn ghost" id="promoApply">Appliquer</button>' +
+        '</div><div class="promo-err" id="promoErr">Code invalide. Réessayez.</div></div>';
+
     root.innerHTML =
       '<div class="cartlist">' + rows + '</div>' +
+      promoBlock +
       '<div class="summary">' +
-        '<div class="tot">Total<b>' + eur(BumpCart.total()) + '</b></div>' +
+        '<div class="tots">' +
+          '<div class="line-sub">Sous-total <span>' + eur(subtotal) + '</span></div>' +
+          (applied ? '<div class="line-disc">Réduction (-50 %) <span>-' + eur(discount) + '</span></div>' : '') +
+          '<div class="tot">Total<b>' + eur(grand) + '</b></div>' +
+        '</div>' +
         '<div class="sumacts">' +
           '<button class="btn ghost" id="clearBtn">Vider le panier</button>' +
           '<a class="btn ghost" href="Produits dérivés Bump.html">Continuer mes achats</a>' +
@@ -152,8 +191,22 @@
       r.querySelector('[data-act=dec]').onclick = function () { var it = cur(); if (it) BumpCart.setQty(id, it.qty - 1); renderCart(); };
       r.querySelector('[data-act=rm]').onclick = function () { BumpCart.remove(id); renderCart(); };
     });
-    document.getElementById('clearBtn').onclick = function () { BumpCart.clear(); renderCart(); };
+    document.getElementById('clearBtn').onclick = function () { BumpCart.clear(); localStorage.removeItem(PROMO_KEY); renderCart(); };
     document.getElementById('orderBtn').onclick = function () { document.getElementById('orderMsg').style.display = 'block'; };
+
+    if (applied) {
+      document.getElementById('promoRemove').onclick = function () { localStorage.removeItem(PROMO_KEY); renderCart(); };
+    } else {
+      var input = document.getElementById('promoInput');
+      var err = document.getElementById('promoErr');
+      function tryApply() {
+        var v = (input.value || '').trim().toUpperCase().replace(/\s+/g, '');
+        if (v === PROMO_CODE) { localStorage.setItem(PROMO_KEY, '1'); renderCart(); }
+        else { err.style.display = 'block'; input.focus(); }
+      }
+      document.getElementById('promoApply').onclick = tryApply;
+      input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); tryApply(); } });
+    }
   };
 </script>
 <script src="scripts/countdown.js"></script>
