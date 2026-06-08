@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le quiz — Plutôt Fun ou Serious ? · Charles-Éric</title>
+<link rel="stylesheet" href="styles/campaign.css">
+<style>
+  body{background:#0f1f3a;color:#fff;
+    background:radial-gradient(120% 70% at 85% -5%, rgba(255,82,82,0.14) 0%, rgba(255,82,82,0) 50%),linear-gradient(170deg,#16335f 0%,#10203c 60%,#0e1b33 100%);
+    min-height:100vh;}
+  .wrap{max-width:880px;margin:0 auto;padding:72px 48px 96px;}
+
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:14px;}
+  header.top .brand{display:inline-flex;}
+  header.top img.logo{height:44px;display:block;}
+  header.top .nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  header.top .nav a{font-family:var(--body);font-weight:600;font-size:15px;color:#c3cfe8;text-decoration:none;padding:9px 17px;border-radius:999px;display:inline-flex;align-items:center;transition:background .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);}
+  header.top .nav a:hover{color:#fff;background:rgba(255,255,255,0.07);}
+  header.top .nav a.active{color:#fff;background:rgba(255,82,82,0.16);box-shadow:inset 0 0 0 1px rgba(255,82,82,0.45);}
+  header.top .nav .nav-meta{font-family:var(--body);font-weight:600;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#7d90b8;margin-left:10px;}
+  @media(max-width:600px){header.top .nav .nav-meta{display:none;}}
+
+  .hero{margin:40px 0 44px;border-top:1px solid rgba(255,255,255,0.12);padding-top:40px;}
+  .hero .kick{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+  .hero .kick img{height:24px;display:block;}
+  .hero .kick span{font-family:var(--body);font-weight:700;font-size:14px;letter-spacing:0.16em;text-transform:uppercase;color:var(--coral);}
+  .hero h1{margin:0;font-family:var(--display);font-weight:900;letter-spacing:-0.035em;line-height:0.94;font-size:64px;}
+  .hero h1 .s{color:var(--coral);}
+  .hero p{margin:20px 0 0;font-family:var(--body);font-size:18px;line-height:1.5;color:#c3cfe8;max-width:620px;}
+
+  .q{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:18px;padding:24px 26px;margin-bottom:18px;}
+  .q .qn{font-family:var(--body);font-weight:700;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--coral);margin-bottom:8px;}
+  .q h3{margin:0 0 16px;font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:-0.01em;color:#fff;}
+  .opts{display:flex;flex-direction:column;gap:10px;}
+  .opt{display:flex;align-items:center;gap:12px;cursor:pointer;padding:13px 16px;border-radius:12px;
+    border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.02);
+    font-family:var(--body);font-size:15px;color:#dbe3f3;transition:border-color .15s,background .15s;}
+  .opt:hover{border-color:rgba(255,82,82,0.4);background:rgba(255,82,82,0.06);}
+  .opt input{appearance:none;-webkit-appearance:none;flex:none;width:18px;height:18px;border-radius:50%;
+    border:2px solid rgba(255,255,255,0.35);margin:0;display:grid;place-content:center;transition:border-color .15s;}
+  .opt input::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--coral);transform:scale(0);transition:transform .15s;}
+  .opt input:checked{border-color:var(--coral);}
+  .opt input:checked::before{transform:scale(1);}
+  .opt:has(input:checked){border-color:rgba(255,82,82,0.6);background:rgba(255,82,82,0.10);color:#fff;}
+
+  .submit{margin-top:8px;font-family:var(--body);font-weight:700;font-size:16px;border:0;cursor:pointer;
+    background:var(--coral);color:#fff;padding:16px 28px;border-radius:999px;box-shadow:0 10px 26px rgba(255,82,82,0.32);
+    transition:background .2s cubic-bezier(.4,0,.2,1);}
+  .submit:hover{background:var(--coral-deep);}
+  .warn{margin-top:14px;font-family:var(--body);font-size:14px;color:#FF8A8A;display:none;}
+
+  .result{display:none;background:linear-gradient(158deg,#1D2939 0%,#2C405A 100%);border-radius:24px;padding:40px 36px;margin-top:8px;}
+  .result .badge{font-family:var(--body);font-weight:700;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--coral);}
+  .result h2{margin:10px 0 0;font-family:var(--display);font-weight:900;letter-spacing:-0.025em;font-size:40px;line-height:1.02;}
+  .result h2 .s{color:var(--coral);}
+  .result .score{margin-top:6px;font-family:var(--body);font-size:15px;color:#9fb2da;}
+  .result p{margin:16px 0 0;font-family:var(--body);font-size:17px;line-height:1.55;color:#c3cfe8;}
+  .result .acts{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{font-family:var(--body);font-weight:700;font-size:14px;text-decoration:none;border:0;cursor:pointer;
+    padding:13px 22px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;
+    transition:background .2s cubic-bezier(.4,0,.2,1),border-color .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);}
+  .btn.primary{background:var(--coral);color:#fff;}
+  .btn.primary:hover{background:var(--coral-deep);}
+  .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.25);}
+  .btn.ghost:hover{border-color:rgba(255,82,82,0.6);}
+
+  footer{margin-top:60px;border-top:1px solid rgba(255,255,255,0.12);padding-top:28px;
+    font-family:var(--body);font-size:14px;color:#8aa0cc;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+
+  @media(max-width:600px){.wrap{padding:48px 24px 72px;}.hero h1{font-size:48px;}.result h2{font-size:32px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="index.html"><img class="logo" src="assets/logo-bump-white.png" alt="bump"></a>
+    <nav class="nav">
+      <a href="index.html">Le kit</a>
+      <a href="soutiens.html">Mes soutiens</a>
+      <a href="Produits dérivés Bump.html">Boutique</a>
+      <a href="quiz.html" class="active">Quiz</a>
+      <a href="panier.html">Panier <span class="cart-count">0</span></a>
+      <span class="nav-meta">Award Fun&nbsp;&amp;&nbsp;Serious · 2026</span>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="kick"><img src="assets/bolt-coral.png" alt=""><span>Le test de campagne</span></div>
+    <h1>Plutôt Fun ou <span class="s">Serious ?</span></h1>
+    <p>Six questions pour savoir de quel côté vous penchez. Spoiler : il n'y a qu'une bonne réponse, et elle se présente au mandat numéro quatre.</p>
+  </section>
+
+  <form id="quiz">
+    <div class="q">
+      <div class="qn">Question 1</div>
+      <h3>Réunion d'équipe, lundi 9h. Vous arrivez avec…</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q1" value="2"><span>Un café noir et l'ordre du jour déjà imprimé.</span></label>
+        <label class="opt"><input type="radio" name="q1" value="1"><span>Un café, et une blague pour réveiller la salle.</span></label>
+        <label class="opt"><input type="radio" name="q1" value="0"><span>…vous arrivez, c'est déjà bien.</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qn">Question 2</div>
+      <h3>Une borne tombe en panne un vendredi à 23h.</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q2" value="2"><span>Je prends l'astreinte et je traite, point.</span></label>
+        <label class="opt"><input type="radio" name="q2" value="1"><span>J'envoie un message rassurant, puis je gère.</span></label>
+        <label class="opt"><input type="radio" name="q2" value="0"><span>Demain il fera jour.</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qn">Question 3</div>
+      <h3>Votre devise au bureau ?</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q3" value="2"><span>« Zéro émission de bullshit. »</span></label>
+        <label class="opt"><input type="radio" name="q3" value="1"><span>« Fun & Serious. »</span></label>
+        <label class="opt"><input type="radio" name="q3" value="0"><span>« On verra bien. »</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qn">Question 4</div>
+      <h3>La pause déjeuner idéale ?</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q4" value="2"><span>Un tableur de TCO ouvert en fond, par précaution.</span></label>
+        <label class="opt"><input type="radio" name="q4" value="1"><span>Babyfoot d'abord, tableur ensuite.</span></label>
+        <label class="opt"><input type="radio" name="q4" value="0"><span>Babyfoot, puis micro-sieste.</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qn">Question 5</div>
+      <h3>La trompette, pour vous, c'est…</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q5" value="2"><span>Un piège dont on ne se fait pas avoir.</span></label>
+        <label class="opt"><input type="radio" name="q5" value="1"><span>Sympa, mais un peu bruyant.</span></label>
+        <label class="opt"><input type="radio" name="q5" value="0"><span>J'adore les trompettistes.</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qn">Question 6</div>
+      <h3>Le mandat numéro quatre de Charles-Éric ?</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q6" value="2"><span>Je signe tout de suite.</span></label>
+        <label class="opt"><input type="radio" name="q6" value="1"><span>J'y réfléchis sérieusement.</span></label>
+        <label class="opt"><input type="radio" name="q6" value="0"><span>C'est qui le sortant, déjà ?</span></label>
+      </div>
+    </div>
+
+    <button type="submit" class="submit">Voir mon résultat</button>
+    <div class="warn" id="warn">Répondez aux six questions pour voir votre résultat.</div>
+  </form>
+
+  <section class="result" id="result">
+    <div class="badge" id="rBadge">Votre profil</div>
+    <h2 id="rTitle"></h2>
+    <div class="score" id="rScore"></div>
+    <p id="rText"></p>
+    <div class="acts">
+      <a class="btn primary" href="soutiens.html" id="rCta">Je soutiens Charles-Éric</a>
+      <button class="btn ghost" id="rShare" type="button">Partager mon résultat</button>
+      <button class="btn ghost" id="rRetry" type="button">Refaire le quiz</button>
+    </div>
+  </section>
+
+  <footer>
+    <span>Charles-Éric · Le mandat numéro quatre · Award Fun&nbsp;&amp;&nbsp;Serious 2026</span>
+    <span>Palette : Coral #FF5252 · Navy #153879 / #1E2A3A</span>
+  </footer>
+</div>
+
+<script src="scripts/cart.js"></script>
+<script src="scripts/countdown.js"></script>
+<script>
+(function () {
+  var form = document.getElementById('quiz');
+  var warn = document.getElementById('warn');
+  var result = document.getElementById('result');
+  var RESULTS = [
+    { min: 9, title: 'Surtout Serious.', badge: 'Profil : noyau dur',
+      text: "Vous êtes déjà dans le camp du mandat numéro quatre. Rigueur, sang-froid et zéro émission de bullshit : Charles-Éric n'a qu'à compter sur vous. On ne se fera pas avoir par les trompettistes." },
+    { min: 5, title: 'Fun & Serious.', badge: 'Profil : équilibriste',
+      text: "Vous tenez les deux bouts, le sourire et le sérieux. Penchez juste un peu plus vers le Serious et le quatrième mandat est joué. La trompette ? Avec modération." },
+    { min: 0, title: 'Plutôt Fun.', badge: 'Profil : à convaincre',
+      text: "Vous aimez l'ambiance, et c'est précieux. Mais il est encore temps de virer Serious : écoutez l'allocution de campagne, et on en reparle. Les trompettistes vous attendent au tournant." }
+  ];
+  var current = RESULTS[0];
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var total = 0, answered = 0;
+    for (var i = 1; i <= 6; i++) {
+      var sel = form.querySelector('input[name="q' + i + '"]:checked');
+      if (sel) { answered++; total += parseInt(sel.value, 10); }
+    }
+    if (answered < 6) { warn.style.display = 'block'; return; }
+    warn.style.display = 'none';
+
+    current = RESULTS.filter(function (r) { return total >= r.min; })[0];
+    document.getElementById('rBadge').textContent = current.badge;
+    document.getElementById('rTitle').innerHTML = current.title.replace('Serious', '<span class="s">Serious</span>');
+    document.getElementById('rScore').textContent = 'Score : ' + total + ' / 12';
+    document.getElementById('rText').textContent = current.text;
+    result.style.display = 'block';
+    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.getElementById('rRetry').addEventListener('click', function () {
+    form.reset();
+    result.style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  document.getElementById('rShare').addEventListener('click', function () {
+    var btn = this;
+    var txt = 'Je suis « ' + current.title.replace(/\.$/, '') + ' » au quiz Fun ou Serious de Charles-Éric. Surtout Serious. ' + location.href;
+    if (navigator.share) {
+      navigator.share({ title: 'Plutôt Fun ou Serious ?', text: txt, url: location.href }).catch(function () {});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(txt).then(function () {
+        var old = btn.textContent; btn.textContent = 'Lien copié';
+        setTimeout(function () { btn.textContent = old; }, 1300);
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>
