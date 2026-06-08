@@ -178,11 +178,10 @@
         '<div class="sumacts">' +
           '<button class="btn ghost" id="clearBtn">Vider le panier</button>' +
           '<a class="btn ghost" href="Produits dérivés Bump.html">Continuer mes achats</a>' +
-          '<button class="btn primary" id="orderBtn">Passer commande</button>' +
+          '<a class="btn primary" href="paiement.html">Passer au paiement</a>' +
         '</div>' +
       '</div>' +
-      '<div class="ordered" id="orderMsg" style="display:none">Merci, votre commande de campagne est notée. Surtout Serious : un membre de l\'équipe vous recontacte. (Boutique concept, paiement non connecté.)</div>' +
-      '<p class="note">Boutique concept : le paiement n\'est pas connecté, la commande n\'est pas réellement enregistrée.</p>';
+      '<p class="note">Boutique concept : le paiement est une démonstration fictive, aucune commande n\'est réellement enregistrée.</p>';
 
     [].forEach.call(root.querySelectorAll('.row'), function (r) {
       var id = r.getAttribute('data-id');
@@ -192,7 +191,6 @@
       r.querySelector('[data-act=rm]').onclick = function () { BumpCart.remove(id); renderCart(); };
     });
     document.getElementById('clearBtn').onclick = function () { BumpCart.clear(); localStorage.removeItem(PROMO_KEY); renderCart(); };
-    document.getElementById('orderBtn').onclick = function () { document.getElementById('orderMsg').style.display = 'block'; };
 
     if (applied) {
       document.getElementById('promoRemove').onclick = function () { localStorage.removeItem(PROMO_KEY); renderCart(); };
