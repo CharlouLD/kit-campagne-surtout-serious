@@ -71,6 +71,10 @@
   .cap .buy:hover{background:var(--coral-600);}
   .cap .buy svg{width:16px;height:16px;}
   .cap .buy.added{background:#1f8f5f;}
+  .cap .viewers{display:inline-flex;align-items:center;gap:9px;margin-top:14px;font-family:var(--body);font-size:13.5px;color:#c3cfe8;}
+  .cap .viewers .dot{flex:none;width:9px;height:9px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 0 rgba(61,220,132,.55);animation:vpulse 1.8s infinite;}
+  .cap .viewers b{color:#fff;font-weight:700;}
+  @keyframes vpulse{0%{box-shadow:0 0 0 0 rgba(61,220,132,.55)}70%{box-shadow:0 0 0 8px rgba(61,220,132,0)}100%{box-shadow:0 0 0 0 rgba(61,220,132,0)}}
 
   .cap .shopline{margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
   .cap .shopline .price{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-0.02em;color:#fff;}
@@ -135,6 +139,7 @@
         <div class="nm">Une journée avec Son Altesse Suprême Charles-Éric</div>
         <div class="dim">Expérience VIP · 1 personne · 1 journée · 1&nbsp;500&nbsp;€</div>
         <div class="desc">Accès personnel au candidat sortant pour une journée entière : café d'ouverture, conseils stratégiques, écoute de l'allocution en exclusivité et photo de campagne dédicacée. Surtout Serious, mais avec le sourire.</div>
+        <div class="viewers"><span class="dot"></span><span><b id="viewerCount">7</b> personnes consultent cette offre en ce moment</span></div>
         <a class="buy" href="https://tally.so/r/dWzDPz" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
           Réserver la journée
@@ -346,5 +351,18 @@
 </div>
 <script src="scripts/cart.js"></script>
 <script src="scripts/countdown.js"></script>
+<script>
+(function () {
+  var el = document.getElementById('viewerCount');
+  if (!el) return;
+  var n = 7;
+  setInterval(function () {
+    n += Math.round(Math.random() * 2 - 1); // -1, 0 ou +1
+    if (n < 5) n = 5;
+    if (n > 12) n = 12;
+    el.textContent = n;
+  }, 4000);
+})();
+</script>
 </body>
 </html>
