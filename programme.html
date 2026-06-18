@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mon programme — Charles-Éric · Surtout Serious</title>
+<link rel="stylesheet" href="styles/campaign.css">
+<style>
+  body{background:#0f1f3a;color:#fff;
+    background:radial-gradient(120% 70% at 85% -5%, rgba(255,82,82,0.14) 0%, rgba(255,82,82,0) 50%),linear-gradient(170deg,#16335f 0%,#10203c 60%,#0e1b33 100%);
+    min-height:100vh;}
+  .wrap{max-width:1280px;margin:0 auto;padding:72px 48px 96px;}
+
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:14px;}
+  header.top .brand{display:inline-flex;}
+  header.top img.logo{height:44px;display:block;}
+  header.top .nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  header.top .nav a{font-family:var(--body);font-weight:600;font-size:15px;color:#c3cfe8;text-decoration:none;padding:9px 17px;border-radius:999px;display:inline-flex;align-items:center;transition:background .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);}
+  header.top .nav a:hover{color:#fff;background:rgba(255,255,255,0.07);}
+  header.top .nav a.active{color:#fff;background:rgba(255,82,82,0.16);box-shadow:inset 0 0 0 1px rgba(255,82,82,0.45);}
+  header.top .nav .nav-meta{font-family:var(--body);font-weight:600;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#7d90b8;margin-left:10px;}
+  @media(max-width:600px){header.top .nav .nav-meta{display:none;}}
+
+  .hero{margin:40px 0 56px;border-top:1px solid rgba(255,255,255,0.12);padding-top:40px;}
+  .hero .kick{display:flex;align-items:center;gap:12px;margin-bottom:22px;}
+  .hero .kick img{height:26px;display:block;}
+  .hero .kick span{font-family:var(--body);font-weight:700;font-size:15px;letter-spacing:0.16em;text-transform:uppercase;color:var(--coral);}
+  .hero h1{margin:0;font-family:var(--display);font-weight:900;letter-spacing:-0.035em;line-height:0.92;font-size:84px;}
+  .hero h1 .s{color:var(--coral);}
+  .hero p{margin:24px 0 0;font-family:var(--body);font-size:20px;line-height:1.5;color:#c3cfe8;max-width:720px;}
+
+  /* two pledges band */
+  .pledges{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin:0 0 64px;}
+  .pledge{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:20px;padding:32px 30px;}
+  .pledge .ic{font-size:34px;line-height:1;}
+  .pledge h3{margin:16px 0 0;font-family:var(--display);font-weight:800;letter-spacing:-0.02em;font-size:26px;color:#fff;}
+  .pledge h3 .s{color:var(--coral);}
+  .pledge p{margin:12px 0 0;font-family:var(--body);font-size:16px;line-height:1.5;color:#a9b8d8;}
+
+  .sec-title{font-family:var(--display);font-weight:800;letter-spacing:-0.02em;font-size:30px;margin:0 0 8px;}
+  .sec-note{font-family:var(--body);font-size:14px;color:#8aa0cc;margin:0 0 28px;}
+  section{margin:0 0 64px;}
+
+  /* 10 points */
+  .points{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;counter-reset:pt;}
+  .pt{position:relative;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:18px;padding:22px 24px 22px 70px;
+    transition:border-color .2s cubic-bezier(.4,0,.2,1),transform .2s cubic-bezier(.4,0,.2,1);}
+  .pt:hover{border-color:rgba(255,82,82,0.4);transform:translateY(-3px);}
+  .pt::before{counter-increment:pt;content:counter(pt);position:absolute;left:22px;top:22px;width:34px;height:34px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;background:var(--coral);color:#fff;
+    font-family:var(--display);font-weight:800;font-size:17px;box-shadow:0 6px 16px rgba(255,82,82,0.32);}
+  .pt b{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-0.01em;color:#fff;}
+  .pt span{display:block;margin-top:6px;font-family:var(--body);font-size:14.5px;line-height:1.5;color:#a9b8d8;}
+
+  /* calendar */
+  .cal{width:100%;border-collapse:collapse;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.10);border-radius:18px;overflow:hidden;}
+  .cal th,.cal td{text-align:left;padding:13px 20px;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top;}
+  .cal th{font-family:var(--body);font-weight:700;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--coral);background:rgba(255,255,255,0.03);}
+  .cal td:first-child{white-space:nowrap;font-family:var(--body);font-weight:700;color:#cdd9f0;width:120px;}
+  .cal td{font-family:var(--body);font-size:15.5px;line-height:1.5;color:#c3cfe8;}
+  .cal td b{color:#fff;}
+  .cal tr:last-child td{border-bottom:none;}
+
+  /* sketch steps */
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+  .step{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:16px;padding:22px 20px;}
+  .step .t{font-family:var(--mono,monospace);font-weight:600;font-size:13px;color:var(--coral);}
+  .step .h{margin-top:8px;font-family:var(--display);font-weight:800;font-size:19px;color:#fff;}
+  .step .d{margin-top:8px;font-family:var(--body);font-size:14px;line-height:1.45;color:#a9b8d8;}
+
+  /* CTA */
+  .cta{margin-top:64px;background:linear-gradient(158deg,#1D2939 0%,#2C405A 100%);border-radius:24px;padding:48px 44px;
+    display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;}
+  .cta .ct{max-width:620px;}
+  .cta h2{margin:0;font-family:var(--display);font-weight:900;letter-spacing:-0.025em;font-size:38px;line-height:1.02;}
+  .cta h2 .s{color:var(--coral);}
+  .cta p{margin:14px 0 0;font-family:var(--body);font-size:17px;line-height:1.5;color:#c3cfe8;}
+  .cta .acts{display:flex;gap:14px;flex-wrap:wrap;}
+  .cta .btn{font-family:var(--body);font-weight:700;font-size:15px;text-decoration:none;padding:15px 26px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:9px;transition:background .2s cubic-bezier(.4,0,.2,1),border-color .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);}
+  .cta .btn.primary{background:var(--coral);color:#fff;box-shadow:0 8px 22px rgba(255,82,82,0.32);}
+  .cta .btn.primary:hover{background:var(--coral-deep);}
+  .cta .btn.ghost{color:#fff;border:1px solid rgba(255,255,255,0.25);}
+  .cta .btn.ghost:hover{border-color:rgba(255,82,82,0.6);}
+
+  footer{margin-top:64px;border-top:1px solid rgba(255,255,255,0.12);padding-top:28px;
+    font-family:var(--body);font-size:14px;color:#8aa0cc;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+
+  @media(max-width:900px){
+    .pledges,.points{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr 1fr;}
+    .hero h1{font-size:60px;}
+  }
+  @media(max-width:600px){
+    .wrap{padding:48px 24px 72px;}
+    .steps{grid-template-columns:1fr;}
+    .cta{padding:36px 28px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="index.html"><img class="logo" src="assets/logo-bump-white.png" alt="bump"></a>
+    <nav class="nav">
+      <a href="index.html">Le kit</a>
+      <a href="programme.html" class="active">Programme</a>
+      <a href="soutiens.html">Mes soutiens</a>
+      <a href="Produits dérivés Bump.html">Boutique</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="panier.html">Panier <span class="cart-count">0</span></a>
+      <span class="nav-meta">Award Fun&nbsp;&amp;&nbsp;Serious · 2026</span>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="kick"><img src="assets/bolt-coral.png" alt=""><span>Le mandat numéro quatre · Mes engagements</span></div>
+    <h1>Mon <span class="s">programme.</span></h1>
+    <p>Les autres promettent. Moi, je planifie l'année entière. Deux engagements tenus, mois après mois, point entreprise après point entreprise. Du Fun cadencé, du Serious assumé : voici le programme du quatrième mandat.</p>
+  </section>
+
+  <section>
+    <div class="pledges">
+      <div class="pledge">
+        <div class="ic">🗓️</div>
+        <h3>Une blague par <span class="s">mois.</span></h3>
+        <p>Douze mois, douze blagues. Univers Bump assumé — flotte, recharge, électrique, TCO. Calibrées pour décrocher un sourire sans jamais viser personne. Le calendrier est déjà écrit (voir plus bas).</p>
+      </div>
+      <div class="pledge">
+        <div class="ic">🎭</div>
+        <h3>Un sketch de 5 min à chaque <span class="s">point entreprise.</span></h3>
+        <p>À chaque all-hands, cinq minutes de scène : un running gag, une chute, un clin d'œil maison. Préparé, répété, jamais improvisé à l'arrache. Le Serious, même dans le rire.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-title">Le programme en 10 engagements</h2>
+    <p class="sec-note">Période couverte : juillet 2026 → juin 2027.</p>
+    <div class="points">
+      <div class="pt"><b>Objectif</b><span>Garder une dose de légèreté toute l'année et souder l'équipe — sans charge mentale.</span></div>
+      <div class="pt"><b>Rituel A — 1 blague / mois</b><span>Univers Bump : flotte, recharge, électrique, TCO bienvenus.</span></div>
+      <div class="pt"><b>Rituel B — 1 sketch / point entreprise</b><span>5 min max, 1 à 3 intervenants, un running gag + une chute.</span></div>
+      <div class="pt"><b>Calendrier des blagues</b><span>Une blague pré-écrite par mois, à adapter à l'actu de l'équipe.</span></div>
+      <div class="pt"><b>Canevas de sketch (5 min)</b><span>Accroche → montée → climax → chute Bump → sortie.</span></div>
+      <div class="pt"><b>Banque d'idées de sketches</b><span>Hotline du malus, TCO Anonymes, recharge speed-dating…</span></div>
+      <div class="pt"><b>Ton &amp; humour inclusif</b><span>Bienveillant, jamais une personne nommée comme cible.</span></div>
+      <div class="pt"><b>Workflow d'envoi</b><span>Tout post public suit : draft → validation → envoi.</span></div>
+      <div class="pt"><b>Adaptation période chargée</b><span>Nov.→janv. (loi de finances) : blagues courtes, sketch facultatif.</span></div>
+      <div class="pt"><b>Suivi</b><span>On coche au fil de l'eau, mois après mois. Promesses tenues, visibles.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-title">Le calendrier des blagues</h2>
+    <p class="sec-note">Une par mois. Pré-écrites, prêtes à dégainer.</p>
+    <table class="cal">
+      <thead><tr><th>Mois</th><th>La blague</th></tr></thead>
+      <tbody>
+        <tr><td>Juil. 2026</td><td>Pourquoi la voiture électrique ne raconte jamais de ragots ? Elle garde tout sur sa <b>batterie</b>.</td></tr>
+        <tr><td>Août 2026</td><td>Deux bornes discutent : « Je me sens vidée. » — « T'inquiète, ça va se <b>recharger</b>. »</td></tr>
+        <tr><td>Sept. 2026</td><td>Rentrée : le gestionnaire de flotte fait son <b>TCO</b>… même sa to-do list a un coût total de possession.</td></tr>
+        <tr><td>Oct. 2026</td><td>Pourquoi le malus a du mal à se faire des amis ? À chaque fois qu'il arrive, l'ambiance <b>prend du grammage</b>.</td></tr>
+        <tr><td>Nov. 2026</td><td>Loi de finances oblige : même mon café passe en <b>barème révisé</b>.</td></tr>
+        <tr><td>Déc. 2026</td><td>Le Père Noël passe à l'électrique : il optimise son <b>TCO</b> et recharge les rennes au dépôt.</td></tr>
+        <tr><td>Janv. 2027</td><td>Bonne année ! Résolution : autant d'autonomie qu'une thermique, mais en restant <b>branché</b>.</td></tr>
+        <tr><td>Févr. 2027</td><td>Pourquoi l'AEN est si discrète ? Elle préfère rester un <b>avantage… en nature</b>.</td></tr>
+        <tr><td>Mars 2027</td><td>Le printemps arrive, les bornes refleurissent : la <b>recharge saisonnière</b>.</td></tr>
+        <tr><td>Avr. 2027</td><td>Poisson d'avril : on a dit au commercial que le diesel revenait. Il a fait un <b>TCO</b> pour vérifier.</td></tr>
+        <tr><td>Mai 2027</td><td>Entre deux ponts de mai, la flotte prend ses <b>jours de recharge</b>.</td></tr>
+        <tr><td>Juin 2027</td><td>Bilan : on a surtout <b>rechargé</b> la bonne humeur toute l'année.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2 class="sec-title">Le sketch en 5 actes</h2>
+    <p class="sec-note">Le canevas réutilisable. Cinq minutes, montre en main.</p>
+    <div class="steps">
+      <div class="step"><div class="t">0:00 — 0:30</div><div class="h">Accroche</div><div class="d">Une situation que tout le monde reconnaît.</div></div>
+      <div class="step"><div class="t">0:30 — 2:30</div><div class="h">Montée</div><div class="d">Le quiproquo s'installe. Le running gag démarre.</div></div>
+      <div class="step"><div class="t">2:30 — 4:00</div><div class="h">Climax</div><div class="d">Ça dérape. Gentiment, mais ça dérape.</div></div>
+      <div class="step"><div class="t">4:00 — 4:30</div><div class="h">Chute</div><div class="d">La punchline retombe sur un clin d'œil Bump.</div></div>
+      <div class="step"><div class="t">4:30 — 5:00</div><div class="h">Sortie</div><div class="d">Merci, et teasing du prochain sketch.</div></div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="ct">
+      <h2>Un programme, ça ne se promet pas. Ça se <span class="s">vote.</span></h2>
+      <p>Douze blagues, un sketch à chaque point entreprise, et zéro émission de bullshit. Le mandat numéro quatre sera Fun. Et Surtout Serious.</p>
+    </div>
+    <div class="acts">
+      <a class="btn primary" href="soutiens.html">Rejoindre les soutiens</a>
+      <a class="btn ghost" href="index.html">Voir tout le kit</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Charles-Éric · Le mandat numéro quatre · Award Fun&nbsp;&amp;&nbsp;Serious 2026</span>
+    <span>Palette : Coral #FF5252 · Navy #153879 / #1E2A3A · Gris #F2F2F2</span>
+  </footer>
+</div>
+<script src="scripts/cart.js"></script>
+<script src="scripts/countdown.js"></script>
+</body>
+</html>
